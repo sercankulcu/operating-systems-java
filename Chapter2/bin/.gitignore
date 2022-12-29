@@ -14,8 +14,11 @@
 /ProducerConsumerExample.class
 /ProducerConsumerExampleSemaphore.class
 /RaceConditionExample.class
+/ReadersWritersExample$Reader.class
+/ReadersWritersExample$Writer.class
 /ReadersWritersExample.class
 /RoundRobinSchedulingExample$Process.class
 /RoundRobinSchedulingExample.class
 /SJFSchedulingExample$Process.class
 /SJFSchedulingExample.class
+/DiningPhilosophersExample$Philosopher.class

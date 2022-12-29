@@ -9,6 +9,11 @@ import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.SimpleDoc;
 
+/*
+ * Here is an example of a Java program that demonstrates the use of a printer:
+ * 
+ * */
+
 public class PrinterExample {
     @SuppressWarnings("deprecation")
 		public static void main(String[] args) {

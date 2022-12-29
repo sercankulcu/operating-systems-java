@@ -1,4 +1,10 @@
 import java.util.LinkedList;
+
+/*
+ * Here is an example of a Java program that implements the Working Set page replacement algorithm:
+ * 
+ * */
+
 import java.util.Queue;
 
 public class WorkingSetExample {

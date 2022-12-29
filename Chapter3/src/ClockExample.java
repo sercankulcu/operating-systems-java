@@ -1,6 +1,11 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
+/*
+ * Here is an example of a Java program that implements the Clock page replacement algorithm:
+ * 
+ * */
+
 public class ClockExample {
     private static final int NUM_PAGES = 4;
     private static final int NUM_FRAMES = 2;

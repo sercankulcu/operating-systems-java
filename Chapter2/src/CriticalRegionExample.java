@@ -1,6 +1,11 @@
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/*
+ * Here is an example of a Java program that demonstrates the use of a critical region:
+ * 
+ * */
+
 public class CriticalRegionExample {
     private static final Lock lock = new ReentrantLock();
     private static int counter = 0;
