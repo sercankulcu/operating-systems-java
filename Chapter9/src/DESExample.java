@@ -4,6 +4,11 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+/*
+ * Here is an example of a Java program that demonstrates the use of the 
+ * DES (Data Encryption Standard) algorithm to encrypt and decrypt a message:
+ * */
+
 public class DESExample {
     public static void main(String[] args) throws Exception {
         // The message to be encrypted

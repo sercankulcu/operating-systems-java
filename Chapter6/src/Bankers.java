@@ -1,105 +1,73 @@
-import java.util.*;
+import java.util.Arrays;
+
+/*
+ * Here is an example of a Java program that implements the Banker's algorithm for 
+ * deadlock prevention:
+ * 
+ * */
 
 public class Bankers {
-    private int need[][], allocate[][], max[][], available[][];
-    private int no_proc, no_res;
+  private int[][] need;
+  private int[][] allocation;
+  private int[] available;
+  private int[] work;
+  private boolean[] finished;
+  private int numProcesses;
+  private int numResources;
 
-    private void input() {
-        Scanner in = new Scanner(System.in);
-        System.out.print("\nNo. of Resources  : ");
-        no_res = in.nextInt();
-        System.out.print("\nNo. of Processes : ");
-        no_proc = in.nextInt();
-
-        need     = new int[no_proc][no_res];
-        max      = new int[no_proc][no_res];
-        allocate = new int[no_proc][no_res];
-        available= new int[1]      [no_res];
-
-        /* Input the allocation matrix */
-        System.out.print("\nAllocation Matrix : \n");
-        for(int i = 0; i < no_proc; i++) {
-            for(int j = 0; j < no_res; j++) {
-                allocate[i][j] = in.nextInt();
-            }
-        }
-
-        /* Input the max matrix */
-        System.out.print("\nMaximum resources : \n");
-        for(int i = 0; i < no_proc; i++) {
-            for(int j = 0; j < no_res; j++) {
-                max[i][j] = in.nextInt();
-            }
-        }
-
-        /* Input the available matrx */
-        System.out.print("\nAvailabe resources : \n");
-        for(int i = 0; i < no_res; i++) {
-            available[0][i] = in.nextInt();
-        }
-
-        in.close();
+  public Bankers(int numProcesses, int numResources, int[][] allocation, int[][] max) {
+    this.numProcesses = numProcesses;
+    this.numResources = numResources;
+    this.allocation = allocation;
+    this.need = new int[numProcesses][numResources];
+    this.available = new int[numResources];
+    this.work = new int[numResources];
+    this.finished = new boolean[numProcesses];
+    // Calculate the need matrix
+    for (int i = 0; i < numProcesses; i++) {
+      for (int j = 0; j < numResources; j++) {
+        need[i][j] = max[i][j] - allocation[i][j];
+      }
     }
-
-    /* Calculate the need matrix */
-    private void find_need() {
-        for(int i = 0; i < no_proc; i++) {
-            for(int j = 0; j < no_res; j++) {
-                need[i][j] = max[i][j] - allocate[i][j];
-            }
-        }
+    // Calculate the available vector
+    for (int j = 0; j < numResources; j++) {
+      int sum = 0;
+      for (int i = 0; i < numProcesses; i++) {
+        sum += allocation[i][j];
+      }
+      available[j] = sum;
     }
+    // Initialize the work vector
+    work = Arrays.copyOf(available, available.length);
+  }
 
-    /* Check if all resources for a process can be allocated */
-    private boolean check_resource_allocation(int row) {
-        for(int i = 0; i < no_res; i++) {
-            if(available[0][i] < need[row][i]) {
-                return false;
-            }
+  public boolean isSafe() {
+    // Check if there is a need that is less than or equal to the available resources
+    for (int i = 0; i < numProcesses; i++) {
+      if (!finished[i]) {
+        boolean canAllocate = true;
+        for (int j = 0; j < numResources; j++) {
+          if (need[i][j] > work[j]) {
+            canAllocate = false;
+            break;
+          }
         }
-
-        return true;
+        if (canAllocate) {
+          // If the process can be allocated, update the work and finished vectors
+          finished[i] = true;
+          for (int j = 0; j < numResources; j++) {
+            work[j] += allocation[i][j];
+          }
+          i = -1;
+        }
+      }
     }
-
-    public void is_Safe() {
-
-        int j = 0;
-
-        input();
-        find_need();
-
-        boolean done[] = new boolean[no_proc];
-
-        while ( j < no_proc) {
-            boolean allocated = false;
-
-            for(int i = 0; i < no_proc; i++) {
-                if(!done[i] && check_resource_allocation(i)) {
-                    for(int k = 0; k < no_res; k++) {
-                        available[0][k] = available[0][k] - need[i][k] + max[i][k];
-                    }
-
-                    System.out.println("\nAllocated Process : " + i);
-                    allocated = done[i] = true;
-                    j++;
-                }
-            }
-
-            if(!allocated) {
-                break;
-            }
-        }
-
-        if(j == no_proc) {
-            System.out.println("\nSafely Allocated\n");
-        }
-        else {
-            System.out.println("\nAll processes can't be allocated safely\n");
-        }
+    // Check if all processes have been finished
+    for (boolean b : finished) {
+      if (!b) {
+        return false;
+      }
     }
-
-    /* Begining of the main fnunction */
-    public static void main(String args[]) {
-        new Bankers().is_Safe();
-    }
+    return true;
+  }
 }
