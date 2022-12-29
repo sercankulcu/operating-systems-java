@@ -11,6 +11,7 @@
 /PetersonSolutionExample.class
 /PrioritySchedulingExample$Process.class
 /PrioritySchedulingExample.class
+/ProcessExample.class
 /ProducerConsumerExample.class
 /ProducerConsumerExampleSemaphore.class
 /RaceConditionExample.class
@@ -21,4 +22,3 @@
 /RoundRobinSchedulingExample.class
 /SJFSchedulingExample$Process.class
 /SJFSchedulingExample.class
-/ProcessExample.class
