@@ -1,4 +1,11 @@
-
+/*
+ * Here is an example of how you can use the jHardware library to print information about the 
+ * system's hardware components:
+ * 
+ * This will print the information about the system's hardware components like CPU, Memory, OS, 
+ * Disk, Network, etc. It's worth noting that this library is not part of the standard JDK, so 
+ * you'll need to download and include it in your project.
+ * */
 
 import java.util.Map.Entry;
 import java.util.Set;
