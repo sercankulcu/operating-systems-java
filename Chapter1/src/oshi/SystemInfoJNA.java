@@ -57,7 +57,7 @@ import oshi.util.Util;
 /**
  * A demonstration of access to many of OSHI's capabilities
  */
-public class SystemInfoTest { // NOSONAR squid:S5786
+public class SystemInfoJNA { // NOSONAR squid:S5786
 
     static List<String> oshi = new ArrayList<>();
 
