@@ -4,6 +4,15 @@
  */
 package oshi;
 
+/*
+ * Here is an example of how you can use the oshi library to print information about the 
+ * system's hardware components:
+ * 
+ * This will print the information about the system's hardware components like CPU, Memory, OS, 
+ * Disk, Network, etc. It's worth noting that this library is not part of the standard JDK, so 
+ * you'll need to download and include it in your project.
+ * */
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,9 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.CentralProcessor.PhysicalProcessor;
@@ -52,8 +58,6 @@ import oshi.util.Util;
  * A demonstration of access to many of OSHI's capabilities
  */
 public class SystemInfoTest { // NOSONAR squid:S5786
-
-    private static final Logger logger = LoggerFactory.getLogger(SystemInfoTest.class);
 
     static List<String> oshi = new ArrayList<>();
 
