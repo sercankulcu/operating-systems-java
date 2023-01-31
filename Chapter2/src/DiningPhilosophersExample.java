@@ -4,6 +4,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /*
  * Here is an example of a Java program that demonstrates the "dining philosophers" problem 
  * using mutexes (also known as locks) to synchronize access to the forks:
+ * 
+ * circular wait condition might arise
+ * 
  * */
 
 public class DiningPhilosophersExample {
