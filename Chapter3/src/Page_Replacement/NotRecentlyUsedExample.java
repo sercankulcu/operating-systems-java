@@ -1,3 +1,4 @@
+package Page_Replacement;
 import java.util.LinkedList;
 import java.util.Queue;
 
