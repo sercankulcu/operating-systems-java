@@ -8,7 +8,7 @@ enum ProcessState {
 /**
  * A class for defining a Process
  */
-public class Process implements Comparable{
+public class Process implements Comparable<Object>{
     private String PID;
     private int arrivalTime;
     private int totalExecutionTime;
