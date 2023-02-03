@@ -7,3 +7,6 @@
 /DeadlockExample.class
 /BankersAlgorithmSingleResource.class
 /BankersAlgorithmMultipleResource.class
+/StarvationDeadlock.class
+/StarvationDeadlock$Resource.class
+/StarvationDeadlock$Task.class

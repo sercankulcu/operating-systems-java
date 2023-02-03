@@ -1,6 +1,11 @@
 
 import java.util.Scanner;
 
+/*
+ * Here's an example Java code that implements the Banker's Algorithm for multiple resources:
+ * 
+ * */
+
 public class BankersAlgorithmMultipleResource {
     static int resources, processes;
     static int available[];
