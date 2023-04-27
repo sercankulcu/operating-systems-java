@@ -27,7 +27,7 @@ class Computation2 implements Runnable
     {
         // check if newBarrier is broken or not
         System.out.println("Is the barrier broken? - " + CyclicBarrierDemo.newBarrier.isBroken());
-        sum = 10 + 20;
+        sum = 11 + 20;
         try
         {
             CyclicBarrierDemo.newBarrier.await(3000, TimeUnit.MILLISECONDS);

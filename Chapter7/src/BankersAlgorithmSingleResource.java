@@ -1,5 +1,4 @@
 
-import java.util.Scanner;
 
 /*
  * Here's an example Java code that implements the Banker's Algorithm for a single resource:
@@ -14,7 +13,6 @@ public class BankersAlgorithmSingleResource {
     static int need[];
 
     static void inputData() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter number of processes:");
         //processes = sc.nextInt();
         processes = 4;

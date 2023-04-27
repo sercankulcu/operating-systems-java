@@ -14,7 +14,6 @@ public class BankersAlgorithmSingleResource {
     static int need[];
 
     static void inputData() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter number of processes:");
         //processes = sc.nextInt();
         processes = 4;
