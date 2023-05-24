@@ -1,7 +1,5 @@
 package Arm_Scheduling;
 
-import java.util.Scanner;
-
 /*
  * Here's an example Java code that implements Shortest Seek Time First (SSTF) Disk Arm Scheduling:
  * 
@@ -16,36 +14,35 @@ import java.util.Scanner;
  * */
 
 public class SSTFDiskArmScheduling {
-    static int diskArmMovement(int requests[], int n) {
-        int currentPosition = 11;
-        int totalMovement = 0;
-        boolean visited[] = new boolean[n];
-        for (int i = 0; i < n; i++) {
-            int minDistance = Integer.MAX_VALUE;
-            int nextRequest = -1;
-            for (int j = 0; j < n; j++) {
-                if (!visited[j] && Math.abs(currentPosition - requests[j]) < minDistance) {
-                    minDistance = Math.abs(currentPosition - requests[j]);
-                    nextRequest = j;
-                }
-            }
-            visited[nextRequest] = true;
-            totalMovement += Math.abs(currentPosition - requests[nextRequest]);
-            currentPosition = requests[nextRequest];
-        }
-        return totalMovement;
-    }
+	
+	static int diskArmMovement(int requests[], int head) {
+		
+		int currentPosition = head;
+		int totalMovement = 0;
+		boolean visited[] = new boolean[requests.length];
+		for (int i = 0; i < requests.length; i++) {
+			int minDistance = Integer.MAX_VALUE;
+			int nextRequest = -1;
+			for (int j = 0; j < requests.length; j++) {
+				
+				if (!visited[j] && Math.abs(currentPosition - requests[j]) < minDistance) {
+					minDistance = Math.abs(currentPosition - requests[j]);
+					nextRequest = j;
+				}
+			}
+			visited[nextRequest] = true;
+			System.out.println(currentPosition + " -> " + requests[nextRequest]);
+			totalMovement += Math.abs(currentPosition - requests[nextRequest]);
+			currentPosition = requests[nextRequest];
+		}
+		return totalMovement;
+	}
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of disk requests:");
-        int n = sc.nextInt();
-        int requests[] = new int[n];
-        System.out.println("Enter the disk requests:");
-        for (int i = 0; i < n; i++) {
-            requests[i] = sc.nextInt();
-        }
-        int totalMovement = diskArmMovement(requests, n);
-        System.out.println("Total disk arm movement: " + totalMovement);
-    }
+	public static void main(String[] args) {
+		
+		int requests[] = {98, 183, 37, 122, 14, 124, 65, 67};
+		int head = 53;
+		int totalMovement = diskArmMovement(requests, head);
+		System.out.println("Total disk arm movement: " + totalMovement);
+	}
 }

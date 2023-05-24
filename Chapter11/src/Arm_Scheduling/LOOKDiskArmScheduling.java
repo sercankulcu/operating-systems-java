@@ -1,7 +1,6 @@
 package Arm_Scheduling;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 /*
  * Here's an example Java code that implements LOOK Disk Arm Scheduling:
@@ -18,45 +17,42 @@ import java.util.Scanner;
  * */
 
 public class LOOKDiskArmScheduling {
-    static int diskArmMovement(int requests[], int n, int initialPosition) {
-        int totalMovement = 0;
-        Arrays.sort(requests);
-        int currentPosition = initialPosition;
-        int start = 0;
-        int end = n - 1;
-        boolean direction = false;
-        for (int i = 0; i < n; i++) {
-            if (direction) {
-                totalMovement += Math.abs(requests[end] - currentPosition);
-                currentPosition = requests[end];
-                end--;
-                if (end < 0) {
-                    direction = false;
-                }
-            } else {
-                totalMovement += Math.abs(requests[start] - currentPosition);
-                currentPosition = requests[start];
-                start++;
-                if (start == n) {
-                    direction = true;
-                }
-            }
-        }
-        return totalMovement;
-    }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of disk requests:");
-        int n = sc.nextInt();
-        int requests[] = new int[n];
-        System.out.println("Enter the disk requests:");
-        for (int i = 0; i < n; i++) {
-            requests[i] = sc.nextInt();
-        }
-        System.out.println("Enter initial disk arm position:");
-        int initialPosition = sc.nextInt();
-        int totalMovement = diskArmMovement(requests, n, initialPosition);
-        System.out.println("Total disk arm movement: " + totalMovement);
-    }
+	static int diskArmMovement(int requests[], int head) {
+
+		int totalMovement = 0;
+		Arrays.sort(requests);
+		int currentPosition = head;
+		int start = 0;
+		int end = requests.length - 1;
+		boolean direction = false;
+		for (int i = 0; i < requests.length; i++) {
+			if (direction) {
+				System.out.println(currentPosition + " -> " + requests[end]);
+				totalMovement += Math.abs(requests[end] - currentPosition);
+				currentPosition = requests[end];
+				end--;
+				if (end < 0) {
+					direction = false;
+				}
+			} else {
+				System.out.println(currentPosition + " -> " + requests[start]);
+				totalMovement += Math.abs(requests[start] - currentPosition);
+				currentPosition = requests[start];
+				start++;
+				if (start == requests.length) {
+					direction = true;
+				}
+			}
+		}
+		return totalMovement;
+	}
+
+	public static void main(String[] args) {
+
+		int requests[] = {98, 183, 37, 122, 14, 124, 65, 67};
+		int head = 53;
+		int totalMovement = diskArmMovement(requests, head);
+		System.out.println("Total disk arm movement: " + totalMovement);
+	}
 }

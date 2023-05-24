@@ -1,7 +1,5 @@
 package Arm_Scheduling;
 
-import java.util.Scanner;
-
 /*
  * Here's an example Java code that implements First-Come, First-Served (FCFS) Disk Arm Scheduling:
  * 
@@ -14,10 +12,13 @@ import java.util.Scanner;
  * */
 
 public class FCFSDiskArmScheduling {
-    static int diskArmMovement(int requests[], int n) {
-        int currentPosition = 11;
+	
+    static int diskArmMovement(int requests[], int head) {
+    	
+        int currentPosition = head;
         int totalMovement = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < requests.length; i++) {
+        	System.out.println(currentPosition + " -> " + requests[i]);
             totalMovement += Math.abs(currentPosition - requests[i]);
             currentPosition = requests[i];
         }
@@ -25,15 +26,10 @@ public class FCFSDiskArmScheduling {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of disk requests:");
-        int n = sc.nextInt();
-        int requests[] = new int[n];
-        System.out.println("Enter the disk requests:");
-        for (int i = 0; i < n; i++) {
-            requests[i] = sc.nextInt();
-        }
-        int totalMovement = diskArmMovement(requests, n);
+    	
+        int requests[] = {98, 183, 37, 122, 14, 124, 65, 67};
+        int head = 53;
+        int totalMovement = diskArmMovement(requests, head);
         System.out.println("Total disk arm movement: " + totalMovement);
     }
 }

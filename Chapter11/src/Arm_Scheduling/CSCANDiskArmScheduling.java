@@ -1,7 +1,6 @@
 package Arm_Scheduling;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 /*
  * Here's an example Java code that implements C-SCAN Disk Arm Scheduling:
@@ -18,38 +17,78 @@ import java.util.Scanner;
  * */
 
 public class CSCANDiskArmScheduling {
-    static int diskArmMovement(int requests[], int n, int initialPosition) {
-        int totalMovement = 0;
-        Arrays.sort(requests);
-        int currentPosition = initialPosition;
-        int start = 0;
-        int end = n - 1;
-        while (start <= end) {
-            if (currentPosition <= requests[end]) {
-                totalMovement += requests[end] - currentPosition;
-                currentPosition = requests[end];
-                end--;
-            } else {
-                totalMovement += currentPosition - requests[0] + requests[end] - requests[0] + 1;
-                currentPosition = requests[0];
-                start = n - 1;
-            }
-        }
-        return totalMovement;
-    }
+	
+	static int diskArmMovement(int requests[], int head) {
+		
+		int totalMovement = 0;
+		Arrays.sort(requests);
+		int currentPosition = head;
+		int start = 0;
+		int end = requests.length - 1;
+		
+		int temp = 0;
+		int direction = 0; // 0:left 1:right
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter number of disk requests:");
-        int n = sc.nextInt();
-        int requests[] = new int[n];
-        System.out.println("Enter the disk requests:");
-        for (int i = 0; i < n; i++) {
-            requests[i] = sc.nextInt();
-        }
-        System.out.println("Enter initial disk arm position:");
-        int initialPosition = sc.nextInt();
-        int totalMovement = diskArmMovement(requests, n, initialPosition);
-        System.out.println("Total disk arm movement: " + totalMovement);
-    }
+		for(int i = 0; head > requests[i]; i++) {
+			temp = i;
+		}
+
+		if(direction == 0) { // move to left
+			// start from temp to 0, then go to the end, then iterate to temp
+			start = temp;
+			while(start >= 0) {
+				System.out.println(currentPosition + " -> " + requests[start]);
+				totalMovement += currentPosition - requests[start];
+				currentPosition = requests[start];
+				start--;
+			}
+			start = end;
+			while(start > temp) {
+				System.out.println(currentPosition + " -> " + requests[start]);
+				totalMovement += requests[start] - currentPosition;
+				currentPosition = requests[start];
+				start--;
+			}
+		}
+		if(direction == 1) { // move to left
+			// start from temp to end, then go to the 0, then iterate to temp
+			start = temp + 1;
+			while(start <= end) {
+				System.out.println(currentPosition + " -> " + requests[start]);
+				totalMovement += requests[start] - currentPosition;
+				currentPosition = requests[start];
+				start++;
+			}
+			start = 0;
+			while(start < temp) {
+				System.out.println(currentPosition + " -> " + requests[start]);
+				totalMovement += currentPosition - requests[start];
+				currentPosition = requests[start];
+				start++;
+			}
+		}
+		
+		/*while (start <= end) {
+			if (currentPosition <= requests[end]) {
+				System.out.println(currentPosition + " -> " + requests[end]);
+				totalMovement += requests[end] - currentPosition;
+				currentPosition = requests[end];
+				end--;
+			} else {
+				System.out.println(currentPosition + " -> " + requests[0]);
+				totalMovement += currentPosition - requests[0] + requests[end] - requests[0] + 1;
+				currentPosition = requests[0];
+				start = requests.length - 1;
+			}
+		}*/
+		return totalMovement;
+	}
+
+	public static void main(String[] args) {
+		
+		int requests[] = {98, 183, 37, 122, 14, 124, 65, 67};
+		int head = 53;
+		int totalMovement = diskArmMovement(requests, head);
+		System.out.println("Total disk arm movement: " + totalMovement);
+	}
 }
