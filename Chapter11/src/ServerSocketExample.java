@@ -30,6 +30,7 @@ public class ServerSocketExample {
       // Send a message back to the client
       PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
       writer.println("Hello from the server!");
+      serverSocket.close();
     } catch (Exception e) {
       e.printStackTrace();
     }

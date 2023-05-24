@@ -26,6 +26,7 @@ public class ClientSocketExample {
       BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       String message = reader.readLine();
       System.out.println("Received: " + message);
+      socket.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
