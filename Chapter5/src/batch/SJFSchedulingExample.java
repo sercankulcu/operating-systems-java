@@ -1,4 +1,5 @@
-package Scheduling_Batch;
+package batch;
+
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -28,7 +29,7 @@ public class SJFSchedulingExample {
             Process process = processes.poll();
             System.out.println("Running " + process.name + " (execution time: " + process.executionTime + ")");
             try {
-                Thread.sleep(process.executionTime * 1000);
+                Thread.sleep(process.executionTime * 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

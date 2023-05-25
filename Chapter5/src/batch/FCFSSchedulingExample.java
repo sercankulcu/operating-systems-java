@@ -1,4 +1,5 @@
-package Scheduling_Batch;
+package batch;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -25,7 +26,7 @@ public class FCFSSchedulingExample {
             String process = processes.poll();
             System.out.println("Running " + process);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,4 +1,5 @@
-package Scheduling_Batch;
+package batch;
+
 
 /*
  * Here's an implementation of the Shortest Remaining Time Next (SRTN) scheduling algorithm in 
