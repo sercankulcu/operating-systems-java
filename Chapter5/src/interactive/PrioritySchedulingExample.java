@@ -1,4 +1,4 @@
-package Scheduling_Interactive;
+package interactive;
 import java.util.PriorityQueue;
 import java.util.Queue;
 

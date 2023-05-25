@@ -1,4 +1,4 @@
-package Scheduling_Interactive;
+package interactive;
 
 /*
  * Here's an implementation of the Shortest Process Next (SPN) scheduling algorithm in Java:

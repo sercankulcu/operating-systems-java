@@ -1,4 +1,5 @@
-package Scheduling_Interactive;
+
+
 
 /*
  * Here's an implementation of Multiple Queues scheduling algorithm in Java:

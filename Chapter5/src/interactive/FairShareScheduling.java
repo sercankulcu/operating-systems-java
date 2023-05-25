@@ -1,4 +1,4 @@
-package Scheduling_Interactive;
+package interactive;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -20,7 +20,7 @@ import java.util.Queue;
  * 
  * */
 
-public class FairShareSchedulingExample {
+public class FairShareScheduling {
     private static final int NUM_PROCESSES = 5;
     private static final int TIME_SLICE = 2;
 
