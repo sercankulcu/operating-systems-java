@@ -25,62 +25,39 @@ public class CSCANDiskArmScheduling {
 		int currentPosition = head;
 		int start = 0;
 		int end = requests.length - 1;
-		
 		int temp = 0;
-		int direction = 0; // 0:left 1:right
+		int direction = 1; // -1:left 1:right
+		int target = 0;
 
 		for(int i = 0; head > requests[i]; i++) {
 			temp = i;
 		}
 
-		if(direction == 0) { // move to left
-			// start from temp to 0, then go to the end, then iterate to temp
-			start = temp;
-			while(start >= 0) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += currentPosition - requests[start];
-				currentPosition = requests[start];
-				start--;
-			}
-			start = end;
-			while(start > temp) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += requests[start] - currentPosition;
-				currentPosition = requests[start];
-				start--;
-			}
-		}
-		if(direction == 1) { // move to left
-			// start from temp to end, then go to the 0, then iterate to temp
+		if(direction == 1) {
+			target = end;
 			start = temp + 1;
-			while(start <= end) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += requests[start] - currentPosition;
-				currentPosition = requests[start];
-				start++;
-			}
-			start = 0;
-			while(start < temp) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += currentPosition - requests[start];
-				currentPosition = requests[start];
-				start++;
+		} else {
+			target = 0;
+			start = temp;
+		}
+
+		for(int i = 0; i < requests.length; i++) {
+
+			System.out.println(currentPosition + " -> " + requests[start]);
+			totalMovement += Math.abs(currentPosition - requests[start]);
+			currentPosition = requests[start];
+
+			if(start == target) { // arrived to target, change direction
+				if(direction == -1) {
+					start = end;
+				} else {
+					start = 0;
+				}
+			} else {
+				start += direction;
 			}
 		}
 		
-		/*while (start <= end) {
-			if (currentPosition <= requests[end]) {
-				System.out.println(currentPosition + " -> " + requests[end]);
-				totalMovement += requests[end] - currentPosition;
-				currentPosition = requests[end];
-				end--;
-			} else {
-				System.out.println(currentPosition + " -> " + requests[0]);
-				totalMovement += currentPosition - requests[0] + requests[end] - requests[0] + 1;
-				currentPosition = requests[0];
-				start = requests.length - 1;
-			}
-		}*/
 		return totalMovement;
 	}
 

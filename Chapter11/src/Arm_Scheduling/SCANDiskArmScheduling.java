@@ -1,7 +1,6 @@
 package Arm_Scheduling;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 /*
  * Here's an example Java code that implements SCAN Disk Arm Scheduling:
@@ -25,58 +24,40 @@ public class SCANDiskArmScheduling {
 		int start = 0;
 		int end = requests.length - 1;
 		int temp = 0;
-		int direction = 1; // 0:left 1:right
+		int direction = 1; // -1:left 1:right
+		int target = 0;
 
 		for(int i = 0; head > requests[i]; i++) {
 			temp = i;
 		}
 
-		if(direction == 0) { // move to left
-			// start from temp to 0, then go to the end
-			start = temp;
-			while(start >= 0) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += currentPosition - requests[start];
-				currentPosition = requests[start];
-				start--;
-			}
+		if(direction == 1) {
+			target = end;
 			start = temp + 1;
-			while(start <= end) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += requests[start] - currentPosition;
-				currentPosition = requests[start];
-				start++;
-			}
-		}
-		if(direction == 1) { // move to left
-			// start from temp to end, then go to 0
-			start = temp + 1;
-			while(start <= end) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += requests[start] - currentPosition;
-				currentPosition = requests[start];
-				start++;
-			}
+		} else {
+			target = 0;
 			start = temp;
-			while(start >= 0) {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += currentPosition - requests[start];
-				currentPosition = requests[start];
-				start--;
-			}
 		}
-		/*
-			if (currentPosition <= requests[end]) {
-				System.out.println(currentPosition + " -> " + requests[end]);
-				totalMovement += requests[end] - currentPosition;
-				currentPosition = requests[end];
-				end--;
-			} else {
-				System.out.println(currentPosition + " -> " + requests[start]);
-				totalMovement += currentPosition - requests[start];
-				currentPosition = requests[start];
-				start++;
-			}*/
+
+		for(int i = 0; i < requests.length; i++) {
+
+			System.out.println(currentPosition + " -> " + requests[start]);
+			totalMovement += Math.abs(currentPosition - requests[start]);
+			currentPosition = requests[start];
+
+			if(start == target) { // arrived to target, change direction
+				if(direction == -1) {
+					direction = 1;
+					start = temp;
+				} else {
+					direction = -1;
+					start = temp + 1;
+				}
+			}
+
+			start += direction;
+		}
+
 		return totalMovement;
 	}
 
