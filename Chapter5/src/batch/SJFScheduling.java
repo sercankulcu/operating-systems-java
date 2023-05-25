@@ -14,7 +14,7 @@ import java.util.Queue;
  * 
  * */
 
-public class SJFSchedulingExample {
+public class SJFScheduling {
     private static final int NUM_PROCESSES = 5;
 
     public static void main(String[] args) {

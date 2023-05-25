@@ -12,7 +12,7 @@ import java.util.Queue;
  * demonstrating first come, first served scheduling.
  * */
 
-public class FCFSSchedulingExample {
+public class FCFSScheduling {
     private static final int NUM_PROCESSES = 5;
 
     public static void main(String[] args) {
