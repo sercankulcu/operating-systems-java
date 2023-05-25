@@ -19,6 +19,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class MultipleQueuesScheduling {
+	
    static class Process {
       int processId;
       int burstTime;
@@ -32,6 +33,7 @@ public class MultipleQueuesScheduling {
    }
 
    public static void main(String[] args) {
+  	 
       List<Process> processList = new ArrayList<>();
       processList.add(new Process(1, 10, 3));
       processList.add(new Process(2, 5, 1));
@@ -70,7 +72,7 @@ public class MultipleQueuesScheduling {
 
          currProcess.burstTime -= 1;
          time += 1;
-         System.out.println("Time " + time + ": Process " + currProcess.processId + " running");
+         System.out.println("Time " + time + ": Process " + currProcess.processId + " running " + currProcess.burstTime);
 
          if (currProcess.burstTime > 0) {
             if (currProcess.priority == 1) {

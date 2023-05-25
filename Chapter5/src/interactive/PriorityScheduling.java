@@ -14,9 +14,11 @@ import java.util.Queue;
  * */
 
 public class PriorityScheduling {
+	
     private static final int NUM_PROCESSES = 5;
 
     public static void main(String[] args) {
+    	
         // Create a priority queue of processes sorted by priority
         Queue<Process> processes = new PriorityQueue<>(NUM_PROCESSES, (p1, p2) -> p2.priority - p1.priority);
         for (int i = 0; i < NUM_PROCESSES; i++) {

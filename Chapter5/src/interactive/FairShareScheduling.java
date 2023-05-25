@@ -21,15 +21,18 @@ import java.util.Queue;
  * */
 
 public class FairShareScheduling {
+	
     private static final int NUM_PROCESSES = 5;
     private static final int TIME_SLICE = 2;
 
     public static void main(String[] args) {
+    	
         // Create a queue of processes
         Queue<Process> processes = new LinkedList<>();
         for (int i = 0; i < NUM_PROCESSES; i++) {
             int executionTime = (int) (Math.random() * 10) + 1;
             processes.add(new Process("Process " + i, executionTime));
+            System.out.println("Process " + i + " execution time " + executionTime);
         }
         // Run the processes using fair-share scheduling
         int time = 0;
