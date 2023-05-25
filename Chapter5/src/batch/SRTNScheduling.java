@@ -59,6 +59,10 @@ public class SRTNScheduling {
          if (currProcess.remainingTime == 0) {
             processList.remove(0);
          }
+         
+         if(time == 10) {
+        	 processList.add(new Process(4, 2));
+         }
       }
    }
 }

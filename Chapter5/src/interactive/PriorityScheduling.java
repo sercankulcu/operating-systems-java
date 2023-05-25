@@ -37,7 +37,7 @@ public class PriorityScheduling {
         }
     }
 
-    private static class Process {
+    public static class Process {
         String name;
         int priority;
 

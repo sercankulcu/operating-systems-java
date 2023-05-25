@@ -1,6 +1,6 @@
 package interactive;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /*
@@ -28,9 +28,10 @@ public class FairShareScheduling {
     public static void main(String[] args) {
     	
         // Create a queue of processes
-        Queue<Process> processes = new LinkedList<>();
+        //Queue<Process> processes = new LinkedList<>();
+        Queue<Process> processes = new PriorityQueue<>(NUM_PROCESSES, (p1, p2) -> p2.waitTime - p1.waitTime);
         for (int i = 0; i < NUM_PROCESSES; i++) {
-            int executionTime = (int) (Math.random() * 10) + 1;
+            int executionTime = (int) (Math.random() * 20) + 1;
             processes.add(new Process("Process " + i, executionTime));
             System.out.println("Process " + i + " execution time " + executionTime);
         }
@@ -39,9 +40,12 @@ public class FairShareScheduling {
         while (!processes.isEmpty()) {
             Process process = processes.poll();
             int executionTime = Math.min(process.remainingTime, TIME_SLICE);
-            System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ") for " + executionTime + " seconds");
+            System.out.println("time: " + time + " Running " + process.name + " (remaining time: " + 
+            		process.remainingTime + " wait time: " + process.waitTime + ") for " + 
+            			executionTime + " sec");
             time += executionTime;
             process.remainingTime -= executionTime;
+            process.waitTime = -executionTime;
             if (process.remainingTime > 0) {
                 processes.add(process);
             }
@@ -49,17 +53,6 @@ public class FairShareScheduling {
             for (Iterator<Process> it = processes.iterator(); it.hasNext(); ) {
             		Process waitingProcess = it.next();
                 waitingProcess.waitTime += executionTime;
-                if (waitingProcess.waitTime > TIME_SLICE / 2) {
-                    // Give the waiting process a time slice
-                    System.out.println("Running " + waitingProcess.name + " (wait time: " + waitingProcess.waitTime + ") for " + TIME_SLICE + " seconds");
-                    time += TIME_SLICE;
-                    waitingProcess.remainingTime -= TIME_SLICE;
-                    waitingProcess.waitTime = 0;
-                    if (waitingProcess.remainingTime <= 0) {
-                        //processes.remove(waitingProcess);
-                    	it.remove();
-                    }
-                }
             }
         }
         // Print the total execution time
