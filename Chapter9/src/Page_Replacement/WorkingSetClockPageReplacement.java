@@ -2,7 +2,7 @@ package Page_Replacement;
 
 import java.util.*;
 
-public class WorkingSetClockAlgorithm {
+public class WorkingSetClockPageReplacement {
 
 	private static int clockHand = 0;
 
