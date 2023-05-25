@@ -13,7 +13,7 @@ import java.util.Queue;
  * 
  * */
 
-public class PrioritySchedulingExample {
+public class PriorityScheduling {
     private static final int NUM_PROCESSES = 5;
 
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class PrioritySchedulingExample {
             Process process = processes.poll();
             System.out.println("Running " + process.name + " (priority: " + process.priority + ")");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

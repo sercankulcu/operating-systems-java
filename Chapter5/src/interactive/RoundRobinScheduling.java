@@ -13,7 +13,7 @@ import java.util.Queue;
  * 
  * */
 
-public class RoundRobinSchedulingExample {
+public class RoundRobinScheduling {
     private static final int NUM_PROCESSES = 5;
     private static final int TIME_SLICE = 2;
 
@@ -29,7 +29,7 @@ public class RoundRobinSchedulingExample {
             Process process = processes.poll();
             System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ")");
             try {
-                Thread.sleep(TIME_SLICE * 1000);
+                Thread.sleep(TIME_SLICE * 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
