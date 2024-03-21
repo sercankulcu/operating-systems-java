@@ -13,12 +13,12 @@ public class CriticalRegionExample {
     public static void main(String[] args) {
         // Create two threads that increment the counter
         Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 incrementCounter();
             }
         }); 
         Thread t2 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 100000; i++) {
                 incrementCounter();
             }
         });
