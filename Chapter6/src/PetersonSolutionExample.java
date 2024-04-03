@@ -22,12 +22,12 @@ public class PetersonSolutionExample {
     public static void main(String[] args) {
         // Create two threads that increment a shared counter
         Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 1000000; i++) {
                 incrementCounter();
             }
         });
         Thread t2 = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 1000000; i++) {
                 incrementCounter();
             }
         });
