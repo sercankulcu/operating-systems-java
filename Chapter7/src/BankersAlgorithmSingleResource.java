@@ -26,7 +26,7 @@ public class BankersAlgorithmSingleResource {
         for (int i = 0; i < processes; i++) {
             //max[i] = sc.nextInt();
         }
-        max[0] = 6;
+        max[0] = 10;
         max[1] = 5;
         max[2] = 4;
         max[3] = 7;
