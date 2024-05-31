@@ -53,11 +53,11 @@ public class NotRecentlyUsedPageReplacement {
 					frames.remove(toReplace);
 				}
 				// Add the new page to the page table
-				frames.add(new Page(t, true));
+				frames.add(new Page(t, false));
 				pageFaults++;
-				System.out.println("page " + t + " is added to frame list " + frames + " page fault is " + pageFaults);
+				System.out.println("page " + t + " is added to frame list " + frames);
 			} else {
-				System.out.println("page " + t + " is found in frame list " + frames);
+				System.out.println("page " + t + " is found");
 			}
 		}
 		return pageFaults;
@@ -66,8 +66,8 @@ public class NotRecentlyUsedPageReplacement {
 	public static void main(String[] args) {
 
 		int numberOfPages = 8;
-		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1";
-		int numberOfFrames = 4;
+		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1";
+		int numberOfFrames = 3;
 
 		int pageFaults = pageFaults(reference, numberOfPages, numberOfFrames);
 		System.out.println("Number of page faults: " + pageFaults);

@@ -45,8 +45,8 @@ public class FIFOPageReplacement {
 	public static void main(String[] args) {
 
 		int numberOfPages = 8;
-		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1";
-		int numberOfFrames = 4;
+		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1";
+		int numberOfFrames = 3;
 
 		int pageFaults = pageFaults(reference, numberOfPages, numberOfFrames);
 		System.out.println("Number of page faults: " + pageFaults);
