@@ -1,4 +1,4 @@
-package RPC;
+package rpc;
 
 //Server.java
 import java.rmi.Naming;
@@ -6,9 +6,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class Server extends UnicastRemoteObject implements RemoteInterface {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public Server() throws RemoteException {

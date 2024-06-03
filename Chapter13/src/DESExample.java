@@ -1,39 +1,53 @@
-import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+import java.security.SecureRandom;
 import java.util.Base64;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
-/*
- * Here is an example of a Java program that demonstrates the use of the 
- * DES (Data Encryption Standard) algorithm to encrypt and decrypt a message:
- * */
-
 public class DESExample {
-    public static void main(String[] args) throws Exception {
-        // The message to be encrypted
-        String message = "This is a secret message.";
 
-        // Generate a secret key for the DES algorithm
-        Key secretKey = new SecretKeySpec("mysecretkey12345".getBytes(), "DES");
+	public static void main(String[] args) {
+		try {
+			// Generate a DES key
+			KeyGenerator keyGen = KeyGenerator.getInstance("DES");
+			SecureRandom secureRandom = new SecureRandom();
+			keyGen.init(secureRandom);
+			SecretKey secretKey = keyGen.generateKey();
 
-        // Create a cipher object and initialize it for encrypting
-        Cipher cipher = Cipher.getInstance("DES");
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+			// Convert the key to a DESKeySpec
+			byte[] keyBytes = secretKey.getEncoded();
+			DESKeySpec desKeySpec = new DESKeySpec(keyBytes);
+			SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+			SecretKey key = keyFactory.generateSecret(desKeySpec);
 
-        // Encrypt the message
-        byte[] encryptedMessage = cipher.doFinal(message.getBytes());
+			// Initialize the cipher for encryption
+			Cipher cipher = Cipher.getInstance("DES");
+			cipher.init(Cipher.ENCRYPT_MODE, key);
 
-        // Print the encrypted message (in base64 encoding)
-        System.out.println("Encrypted message: " + Base64.getEncoder().encodeToString(encryptedMessage));
+			// Encrypt the message
+			String plainText = "This is a secret message.";
+			byte[] plainTextBytes = plainText.getBytes("UTF8");
+			byte[] encryptedBytes = cipher.doFinal(plainTextBytes);
 
-        // Initialize the cipher for decrypting
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+			// Encode the encrypted bytes to a Base64 string
+			String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+			System.out.println("Encrypted text: " + encryptedText);
 
-        // Decrypt the encrypted message
-        byte[] decryptedMessage = cipher.doFinal(encryptedMessage);
+			// Initialize the cipher for decryption
+			cipher.init(Cipher.DECRYPT_MODE, key);
 
-        // Print the decrypted message
-        System.out.println("Decrypted message: " + new String(decryptedMessage));
-    }
+			// Decode the encrypted bytes from the Base64 string
+			byte[] decryptedBytes = Base64.getDecoder().decode(encryptedText);
+
+			// Decrypt the message
+			byte[] decryptedMessageBytes = cipher.doFinal(decryptedBytes);
+			String decryptedText = new String(decryptedMessageBytes, "UTF8");
+			System.out.println("Decrypted text: " + decryptedText);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -56,7 +56,7 @@ class SmartGridTopology {
     node5.setPowerConsumed(90.0);
 
     System.out.println("Node\tNeighbors\tPower Consumed");
-    System.out.println("--------------------------------");
+    System.out.println("----\t---------\t--------------");
     System.out.println(node1.getName() + "\t" + node1.getNeighbors().size() + "\t\t" + node1.getPowerConsumed());
     System.out.println(node2.getName() + "\t" + node2.getNeighbors().size() + "\t\t" + node2.getPowerConsumed());
     System.out.println(node3.getName() + "\t" + node3.getNeighbors().size() + "\t\t" + node3.getPowerConsumed());
