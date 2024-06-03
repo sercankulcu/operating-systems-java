@@ -27,11 +27,13 @@ public class MutexExample {
                 incrementCounter();
             }
         });
+        
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 1000000; i++) {
                 incrementCounter();
             }
         });
+        
         // Start the threads
         t1.start();
         t2.start();

@@ -16,46 +16,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShortestProcessNextScheduling {
-   static class Process {
-      int processId;
-      int burstTime;
+	static class Process {
+		int processId;
+		int burstTime;
 
-      public Process(int processId, int burstTime) {
-         this.processId = processId;
-         this.burstTime = burstTime;
-      }
-   }
+		public Process(int processId, int burstTime) {
+			this.processId = processId;
+			this.burstTime = burstTime;
+		}
+	}
 
-   public static void main(String[] args) {
-      List<Process> processList = new ArrayList<>();
-      processList.add(new Process(1, 10));
-      processList.add(new Process(2, 5));
-      processList.add(new Process(3, 8));
+	public static void main(String[] args) {
+		List<Process> processList = new ArrayList<>();
+		processList.add(new Process(1, 10));
+		processList.add(new Process(2, 5));
+		processList.add(new Process(3, 8));
 
-      System.out.println("Process ID\tBurst Time");
-      for (Process process : processList) {
-         System.out.println(process.processId + "\t\t" + process.burstTime);
-      }
+		System.out.println("Process ID\tBurst Time");
+		for (Process process : processList) {
+			System.out.println(process.processId + "\t\t" + process.burstTime);
+		}
 
-      int time = 0;
-      while (!processList.isEmpty()) {
-         int shortestProcessIndex = 0;
-         for (int i = 1; i < processList.size(); i++) {
-            if (processList.get(i).burstTime < processList.get(shortestProcessIndex).burstTime) {
-               shortestProcessIndex = i;
-            }
-         }
+		int time = 0;
+		while (!processList.isEmpty()) {
+			int shortestProcessIndex = 0;
+			for (int i = 1; i < processList.size(); i++) {
+				if (processList.get(i).burstTime < processList.get(shortestProcessIndex).burstTime) {
+					shortestProcessIndex = i;
+				}
+			}
 
-         Process currProcess = processList.get(shortestProcessIndex);
-         processList.remove(shortestProcessIndex);
+			Process currProcess = processList.get(shortestProcessIndex);
+			processList.remove(shortestProcessIndex);
 
-         currProcess.burstTime -= 1;
-         time += 1;
-         System.out.println("Time " + time + ": Process " + currProcess.processId + " running");
+			currProcess.burstTime -= 1;
+			time += 1;
+			System.out.println("Time " + time + ": Process " + currProcess.processId + " running");
 
-         if (currProcess.burstTime > 0) {
-            processList.add(currProcess);
-         }
-      }
-   }
+			if (currProcess.burstTime > 0) {
+				processList.add(currProcess);
+			}
+		}
+	}
 }

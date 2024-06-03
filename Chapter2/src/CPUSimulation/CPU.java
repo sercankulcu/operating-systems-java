@@ -1,9 +1,8 @@
-package CPU_Simulation;
+package CPUSimulation;
 
 enum CPUState {
     BUSY, READY
 }
-
 
 public class CPU  {
     private Process process;

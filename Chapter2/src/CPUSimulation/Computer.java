@@ -1,4 +1,4 @@
-package CPU_Simulation;
+package CPUSimulation;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -43,7 +43,7 @@ public class Computer
         resetScanner();
         listOfProcessObjects = readFile();
 
-        System.out.println("Now performing a simulation based on SJF...");
+        System.out.println("\nNow performing a simulation based on SJF...");
         shortestJobFirst(listOfCPUObjects, listOfProcessObjects);
         System.out.println("SJF simulation finished!");
 
@@ -51,7 +51,7 @@ public class Computer
         resetScanner();
         listOfProcessObjects = readFile();
 
-        System.out.println("Now performing a simulation based on SRTF...");
+        System.out.println("\nNow performing a simulation based on SRTF...");
         shortestRemainingTimeFirst(listOfCPUObjects, listOfProcessObjects);
         System.out.println("SRTF simulation finished!");
 
@@ -59,17 +59,10 @@ public class Computer
         resetScanner();
         listOfProcessObjects = readFile();
 
-        //System.out.print("Now for Round-robin. Please choose an integer time-quantum: ");
-        // Sets up Scanner for user input
-        sc.close(); // closes Scanner to the file
-        setScannerToUserMode();
-        //int quantum = sc.nextInt();
+        System.out.println("\nNow performing a simulation based on Round-robin...");
         int quantum = 1;
-
         roundRobin(quantum, listOfCPUObjects, listOfProcessObjects);
         System.out.println("RR simulation finished!\n");
-
-        sc.close(); // closes Scanner to user input
     }
 
     private static void firstComeFirstServe(ArrayList<CPU> cpus, ArrayList<Process> processes){
@@ -191,20 +184,9 @@ public class Computer
 
         // HANDLES DISPLAYING CPU UTILIZATION
         displayCPUUtilization(cpus, timeUnit);
-
-        System.out.println();
-
         displayAverageWaitTime(processes);
-
-        System.out.println();
-
         displayTurnaroundTime(processes);
-
-        System.out.println();
-
         displayCpuResponseTime(processes);
-
-        System.out.println();
     }
 
     private static void roundRobin(int timeQuantum, ArrayList<CPU> cpus, ArrayList<Process> processes){
@@ -346,20 +328,9 @@ public class Computer
 
         // HANDLES DISPLAYING CPU UTILIZATION
         displayCPUUtilization(cpus, timeUnit);
-
-        System.out.println();
-
         displayAverageWaitTime(processes);
-
-        System.out.println();
-
         displayTurnaroundTime(processes);
-
-        System.out.println();
-
         displayCpuResponseTime(processes);
-
-        System.out.println();
     }
 
     private static void shortestJobFirst(ArrayList<CPU> cpus, ArrayList<Process> processes){
@@ -483,20 +454,9 @@ public class Computer
 
         // HANDLES DISPLAYING CPU UTILIZATION
         displayCPUUtilization(cpus, timeUnit);
-
-        System.out.println();
-
         displayAverageWaitTime(processes);
-
-        System.out.println();
-
         displayTurnaroundTime(processes);
-
-        System.out.println();
-
         displayCpuResponseTime(processes);
-
-        System.out.println();
     }
 
     private static void shortestRemainingTimeFirst(ArrayList<CPU> cpus, ArrayList<Process> processes){
@@ -652,20 +612,9 @@ public class Computer
 
         // HANDLES DISPLAYING CPU UTILIZATION
         displayCPUUtilization(cpus, timeUnit);
-
-        System.out.println();
-
         displayAverageWaitTime(processes);
-
-        System.out.println();
-
         displayTurnaroundTime(processes);
-
-        System.out.println();
-
         displayCpuResponseTime(processes);
-
-        System.out.println();
     }
 
     private static ArrayList<Process> readFile() {
@@ -736,10 +685,6 @@ public class Computer
         }
     }
 
-    private static void setScannerToUserMode(){
-        sc = new Scanner(System.in);
-    }
-
     private static void resetAllCPUs(ArrayList<CPU> cpus){
         for (CPU cpu: cpus) {
             cpu.setState(CPUState.READY);
@@ -766,9 +711,9 @@ public class Computer
     }
 
     private static void displayAverageWaitTime(ArrayList<Process> processes){
-        double waitSum;
+        double waitSum = 0;
         ArrayList<Double> averagePerProcess = new ArrayList<>();
-        double average =0;
+        double average = 0;
 
         for (Process process : processes){
             waitSum = 0;
@@ -783,7 +728,7 @@ public class Computer
             average += perProcess;
         }
 
-        average = average/averagePerProcess.size();
+        average /= averagePerProcess.size();
         System.out.println("The average wait time is "+ average + " time units.");
     }
 

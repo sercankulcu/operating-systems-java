@@ -1,9 +1,8 @@
-package CPU_Simulation;
+package CPUSimulation;
 
 enum IODeviceState {
     READY, BUSY
 }
-
 
 public class IODevice {
     private int IOID;

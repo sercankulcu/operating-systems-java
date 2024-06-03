@@ -19,6 +19,7 @@ public class LotteryScheduling {
 	public static void main(String[] args) {
 		// Create a list of processes
 		List<Process> processes = new ArrayList<>();
+		
 		processes.add(new Process(1, 10));
 		processes.add(new Process(2, 20));
 		processes.add(new Process(3, 30));
@@ -28,7 +29,6 @@ public class LotteryScheduling {
 
 			// Run the lottery scheduling algorithm
 			lotteryScheduling(processes);
-
 			// Print the results
 			for (Process process : processes) {
 				System.out.println(process);

@@ -30,8 +30,8 @@ public class NativeProcessDemo {
 
     public static void main(String[] args) throws java.io.IOException, InterruptedException {
         System.out.println(
-            //new NativeProcessDemo.ProcessBuilderDemo().createAndExecuteProcess()
-            new NativeProcessDemo.RuntimeExecDemo().createAndExecuteProcess()
+            new NativeProcessDemo.ProcessBuilderDemo().createAndExecuteProcess()
+            //new NativeProcessDemo.RuntimeExecDemo().createAndExecuteProcess()
         );
     }
 }

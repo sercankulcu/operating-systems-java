@@ -12,7 +12,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * */
 
 public class SpinLock {
+	
     static class Lock {
+    	
         private AtomicReference<Thread> owner = new AtomicReference<>();
         public void lock() {
             Thread currentThread = Thread.currentThread();
@@ -41,11 +43,14 @@ public class SpinLock {
         }
     }
     public static void main(String[] args) {
+    	
         Lock lock = new Lock();
+        
         Task task1 = new Task(lock);
         Task task2 = new Task(lock);
         Task task3 = new Task(lock);
         Task task4 = new Task(lock);
+        
         new Thread(task1, "Task 1").start();
         new Thread(task2, "Task 2").start();
         new Thread(task3, "Task 3").start();

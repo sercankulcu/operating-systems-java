@@ -7,7 +7,9 @@
  * */
 
 public class ArgumentExample {
+	
     public static void main(String[] args) {
+    	
         // Check if at least two arguments were passed
         if (args.length < 2) {
             System.out.println("Please provide at least two arguments.");

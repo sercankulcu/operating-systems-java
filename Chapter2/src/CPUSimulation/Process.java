@@ -1,13 +1,11 @@
-package CPU_Simulation;
+package CPUSimulation;
 import java.util.ArrayList;
+import java.util.List;
 
 enum ProcessState {
   NEW, RUNNING, WAITING, READY, TERMINATED
 }
 
-/**
- * A class for defining a Process
- */
 public class Process implements Comparable<Object>{
     private String PID;
     private int arrivalTime;
@@ -18,7 +16,7 @@ public class Process implements Comparable<Object>{
     private boolean isWaiting;
     private int executionTime;
     private int waitTimeTimer;
-    private ArrayList<Integer> waitTimeArrayList;
+    private List<Integer> waitTimeArrayList;
     private int turnaroundPerProcess;
     private int nbIORequests;
     private boolean CpuResponse;
@@ -80,9 +78,9 @@ public class Process implements Comparable<Object>{
 
     public void setWaitTimeTimer(int waitTimeTimer) { this.waitTimeTimer = waitTimeTimer; }
 
-    public ArrayList<Integer> getWaitTimeArrayList() { return waitTimeArrayList; }
+    public List<Integer> getWaitTimeArrayList() { return waitTimeArrayList; }
 
-    public void setWaitTimeArrayList(ArrayList<Integer> waitTimeArrayList) { this.waitTimeArrayList = waitTimeArrayList; }
+    public void setWaitTimeArrayList(List<Integer> waitTimeArrayList) { this.waitTimeArrayList = waitTimeArrayList; }
 
     public String getPID() {
         return PID;
@@ -96,7 +94,7 @@ public class Process implements Comparable<Object>{
 
     public int getTotalExecutionTime() { return totalExecutionTime; }
 
-    public ArrayList<Integer> getIORequestTime() { return IORequestTime; }
+    public List<Integer> getIORequestTime() { return IORequestTime; }
 
     public ProcessState getStatus() {
         return status;
@@ -122,18 +120,6 @@ public class Process implements Comparable<Object>{
 
     public void setRemainingTime(int remainingTime) { this.remainingTime = remainingTime; }
 
-    /*@Override
-    public String toString() {
-        return "Process{" +
-                "PID='" + PID + '\'' +
-                ", arrivalTime=" + arrivalTime +
-                ", totalExecutionTime=" + totalExecutionTime +
-                ", IORequestTime=" + IORequestTime +
-                ", status=" + status +
-                '}';
-    }*/
-
-    @Override
     public String toString() {
         return "Process{" +
                 "PID='" + PID + '\'' +

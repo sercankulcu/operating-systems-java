@@ -16,11 +16,8 @@ import java.util.concurrent.RecursiveAction;
 
 public class ForkExample extends RecursiveAction {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private static final int THRESHOLD = 1000;
+	private static final int THRESHOLD = 1024;
 	private final int[] array;
 	private final int start;
 	private final int end;
@@ -31,11 +28,10 @@ public class ForkExample extends RecursiveAction {
 		this.end = end;
 	}
 
-	@Override
 	protected void compute() {
-		if (end - start < THRESHOLD) {
+		if (end - start <= THRESHOLD) {
 			// perform some work here
-			System.out.println("end: " + end + " start: " + start);
+			System.out.println("computing start: " + start + " end: " + end);
 		} else {
 			int middle = (start + end) / 2;
 			ForkExample leftTask = new ForkExample(array, start, middle);
@@ -47,7 +43,7 @@ public class ForkExample extends RecursiveAction {
 	}
 
 	public static void main(String[] args) {
-		int[] array = new int[10000];
+		int[] array = new int[16*1024];
 		ForkJoinPool pool = new ForkJoinPool();
 		ForkExample task = new ForkExample(array, 0, array.length);
 		pool.invoke(task);

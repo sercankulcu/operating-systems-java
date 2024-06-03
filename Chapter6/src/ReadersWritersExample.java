@@ -73,6 +73,7 @@ class ReadersWritersExample {
   }
 
   public static void main(String[] args) {
+  	
     Thread reader1 = new Thread(new Reader());
     Thread reader2 = new Thread(new Reader());
     Thread writer1 = new Thread(new Writer());

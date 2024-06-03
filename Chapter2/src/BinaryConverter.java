@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class BinaryConverter {
 
 	public static void main(String[] args) throws InterruptedException {
+		
 		Scanner scanner = new Scanner(System.in);
 
 		// Use a while loop to repeat the process

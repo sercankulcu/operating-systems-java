@@ -14,40 +14,40 @@ import java.util.Queue;
  * */
 
 public class GuaranteedScheduling {
-	
-    private static final int NUM_PROCESSES = 5;
-    private static final int TIME_SLICE = 2;
 
-    public static void main(String[] args) {
-        // Create a queue of processes
-        Queue<Process> processes = new LinkedList<>();
-        for (int i = 0; i < NUM_PROCESSES; i++) {
-            int executionTime = (int) (Math.random() * 10) + 1;
-            processes.add(new Process("Process " + i, executionTime));
-        }
-        // Run the processes using guaranteed scheduling
-        int time = 0;
-        while (!processes.isEmpty()) {
-            Process process = processes.poll();
-            int executionTime = Math.min(process.remainingTime, TIME_SLICE);
-            System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ") for " + executionTime + " seconds");
-            time += executionTime;
-            process.remainingTime -= executionTime;
-            if (process.remainingTime > 0) {
-                processes.add(process);
-            }
-        }
-        // Print the total execution time
-        System.out.println("Total execution time: " + time + " seconds");
-    }
+	private static final int NUM_PROCESSES = 5;
+	private static final int TIME_SLICE = 2;
 
-    private static class Process {
-        String name;
-        int remainingTime;
+	public static void main(String[] args) {
+		// Create a queue of processes
+		Queue<Process> processes = new LinkedList<>();
+		for (int i = 0; i < NUM_PROCESSES; i++) {
+			int executionTime = (int) (Math.random() * 10) + 1;
+			processes.add(new Process("Process " + i, executionTime));
+		}
+		// Run the processes using guaranteed scheduling
+		int time = 0;
+		while (!processes.isEmpty()) {
+			Process process = processes.poll();
+			int executionTime = Math.min(process.remainingTime, TIME_SLICE);
+			System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ") for " + executionTime + " seconds");
+			time += executionTime;
+			process.remainingTime -= executionTime;
+			if (process.remainingTime > 0) {
+				processes.add(process);
+			}
+		}
+		// Print the total execution time
+		System.out.println("Total execution time: " + time + " seconds");
+	}
 
-        Process(String name, int remainingTime) {
-            this.name = name;
-            this.remainingTime = remainingTime;
-        }
-    }
+	private static class Process {
+		String name;
+		int remainingTime;
+
+		Process(String name, int remainingTime) {
+			this.name = name;
+			this.remainingTime = remainingTime;
+		}
+	}
 }

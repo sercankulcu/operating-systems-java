@@ -39,8 +39,7 @@ public class CriticalRegionExample {
     private static void incrementCounter() {
         lock.lock();
         try {
-            counter++;
-            System.out.println("Value of counter: " + counter);
+            System.out.println("Value of counter: " + counter++);
         } finally {
             lock.unlock();
         }

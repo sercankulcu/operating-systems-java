@@ -1,6 +1,8 @@
 
 public class DiningPhilosophers {
+	
     public static void main(String[] args) {
+    	
         Philosopher[] philosophers = new Philosopher[5];
         Object[] forks = new Object[philosophers.length];
 

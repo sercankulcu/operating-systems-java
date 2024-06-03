@@ -1,7 +1,5 @@
 package interactive;
 
-
-
 /*
  * Here's an implementation of Multiple Queues scheduling algorithm in Java:
  * 
@@ -19,70 +17,70 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class MultipleQueuesScheduling {
-	
-   static class Process {
-      int processId;
-      int burstTime;
-      int priority;
 
-      public Process(int processId, int burstTime, int priority) {
-         this.processId = processId;
-         this.burstTime = burstTime;
-         this.priority = priority;
-      }
-   }
+	static class Process {
+		int processId;
+		int burstTime;
+		int priority;
 
-   public static void main(String[] args) {
-  	 
-      List<Process> processList = new ArrayList<>();
-      processList.add(new Process(1, 10, 3));
-      processList.add(new Process(2, 5, 1));
-      processList.add(new Process(3, 8, 2));
-      processList.add(new Process(4, 4, 1));
+		public Process(int processId, int burstTime, int priority) {
+			this.processId = processId;
+			this.burstTime = burstTime;
+			this.priority = priority;
+		}
+	}
 
-      System.out.println("Process ID\tBurst Time\tPriority");
-      for (Process process : processList) {
-         System.out.println(process.processId + "\t\t" + process.burstTime + "\t\t" + process.priority);
-      }
+	public static void main(String[] args) {
 
-      int time = 0;
-      Queue<Process> queue1 = new LinkedBlockingQueue<>();
-      Queue<Process> queue2 = new LinkedBlockingQueue<>();
-      Queue<Process> queue3 = new LinkedBlockingQueue<>();
+		List<Process> processList = new ArrayList<>();
+		processList.add(new Process(1, 10, 3));
+		processList.add(new Process(2, 5, 1));
+		processList.add(new Process(3, 8, 2));
+		processList.add(new Process(4, 4, 1));
 
-      for (Process process : processList) {
-         if (process.priority == 1) {
-            queue1.offer(process);
-         } else if (process.priority == 2) {
-            queue2.offer(process);
-         } else {
-            queue3.offer(process);
-         }
-      }
+		System.out.println("Process ID\tBurst Time\tPriority");
+		for (Process process : processList) {
+			System.out.println(process.processId + "\t\t" + process.burstTime + "\t\t" + process.priority);
+		}
 
-      while (!queue1.isEmpty() || !queue2.isEmpty() || !queue3.isEmpty()) {
-         Process currProcess = null;
-         if (!queue1.isEmpty()) {
-            currProcess = queue1.poll();
-         } else if (!queue2.isEmpty()) {
-            currProcess = queue2.poll();
-         } else if (!queue3.isEmpty()) {
-            currProcess = queue3.poll();
-         }
+		int time = 0;
+		Queue<Process> queue1 = new LinkedBlockingQueue<>();
+		Queue<Process> queue2 = new LinkedBlockingQueue<>();
+		Queue<Process> queue3 = new LinkedBlockingQueue<>();
 
-         currProcess.burstTime -= 1;
-         time += 1;
-         System.out.println("Time " + time + ": Process " + currProcess.processId + " running " + currProcess.burstTime);
+		for (Process process : processList) {
+			if (process.priority == 1) {
+				queue1.offer(process);
+			} else if (process.priority == 2) {
+				queue2.offer(process);
+			} else {
+				queue3.offer(process);
+			}
+		}
 
-         if (currProcess.burstTime > 0) {
-            if (currProcess.priority == 1) {
-               queue1.offer(currProcess);
-            } else if (currProcess.priority == 2) {
-               queue2.offer(currProcess);
-            } else {
-               queue3.offer(currProcess);
-            }
-         }
-      }
-   }
+		while (!queue1.isEmpty() || !queue2.isEmpty() || !queue3.isEmpty()) {
+			Process currProcess = null;
+			if (!queue1.isEmpty()) {
+				currProcess = queue1.poll();
+			} else if (!queue2.isEmpty()) {
+				currProcess = queue2.poll();
+			} else if (!queue3.isEmpty()) {
+				currProcess = queue3.poll();
+			}
+
+			currProcess.burstTime -= 1;
+			time += 1;
+			System.out.println("Time " + time + ": Process " + currProcess.processId + " running " + currProcess.burstTime);
+
+			if (currProcess.burstTime > 0) {
+				if (currProcess.priority == 1) {
+					queue1.offer(currProcess);
+				} else if (currProcess.priority == 2) {
+					queue2.offer(currProcess);
+				} else {
+					queue3.offer(currProcess);
+				}
+			}
+		}
+	}
 }

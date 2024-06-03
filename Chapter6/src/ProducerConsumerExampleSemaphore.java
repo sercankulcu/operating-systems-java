@@ -14,45 +14,46 @@ import java.util.LinkedList;
  * */
 
 public class ProducerConsumerExampleSemaphore {
-    private static final int QUEUE_SIZE = 10;
-    private static final LinkedList<Integer> queue = new LinkedList<>();
-    private static final Semaphore full = new Semaphore(0);
-    private static final Semaphore empty = new Semaphore(QUEUE_SIZE);
-    private static final Semaphore mutex = new Semaphore(1);
 
-    public static void main(String[] args) {
-        // Create a producer thread
-        Thread producer = new Thread(() -> {
-            for (int i = 0; i < 100; i++) {
-                try {
-                    empty.acquire();
-                    mutex.acquire();
-                    queue.add(i);
-                    System.out.println("Produced: " + i);
-                    mutex.release();
-                    full.release();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        // Create a consumer thread
-        Thread consumer = new Thread(() -> {
-            while (true) {
-                try {
-                    full.acquire();
-                    mutex.acquire();
-                    int item = queue.remove();
-                    System.out.println("Consumed: " + item);
-                    mutex.release();
-                    empty.release();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        // Start the threads
-        producer.start();
-        consumer.start();
-    }
+	private static final int QUEUE_SIZE = 10;
+	private static final LinkedList<Integer> queue = new LinkedList<>();
+	private static final Semaphore full = new Semaphore(0);
+	private static final Semaphore empty = new Semaphore(QUEUE_SIZE);
+	private static final Semaphore mutex = new Semaphore(1);
+
+	public static void main(String[] args) {
+		// Create a producer thread
+		Thread producer = new Thread(() -> {
+			for (int i = 0; i < 100; i++) {
+				try {
+					empty.acquire();
+					mutex.acquire();
+					queue.add(i);
+					System.out.println("Produced: " + i);
+					mutex.release();
+					full.release();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		// Create a consumer thread
+		Thread consumer = new Thread(() -> {
+			while (true) {
+				try {
+					full.acquire();
+					mutex.acquire();
+					int item = queue.remove();
+					System.out.println("Consumed: " + item);
+					mutex.release();
+					empty.release();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		// Start the threads
+		producer.start();
+		consumer.start();
+	}
 }

@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * */
 
 public class DiningPhilosophersExample {
+	
     private static final int NUM_PHILOSOPHERS = 5;
     private static final Lock[] mutexes = new ReentrantLock[NUM_PHILOSOPHERS];
 

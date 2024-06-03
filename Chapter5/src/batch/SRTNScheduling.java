@@ -44,18 +44,13 @@ public class SRTNScheduling {
       processList.add(new Process(2, 5));
       processList.add(new Process(3, 8));
 
-      System.out.println("Process ID\tBurst Time\tRemaining Time");
-      for (Process process : processList) {
-         System.out.println(process.processId + "\t\t" + process.burstTime + "\t\t" + process.remainingTime);
-      }
-
       int time = 0;
       while (!processList.isEmpty()) {
          Collections.sort(processList);
          Process currProcess = processList.get(0);
          currProcess.remainingTime -= 1;
          time += 1;
-         System.out.println("Time " + time + ": Process " + currProcess.processId + " running");
+         System.out.println("Time " + time + ": Process " + currProcess.processId + " running. Remaining time: " + currProcess.remainingTime);
          if (currProcess.remainingTime == 0) {
             processList.remove(0);
          }

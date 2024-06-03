@@ -14,41 +14,41 @@ import java.util.Queue;
  * */
 
 public class RoundRobinScheduling {
-	
-    private static final int NUM_PROCESSES = 5;
-    private static final int TIME_SLICE = 2;
 
-    public static void main(String[] args) {
-    	
-        // Create a queue of processes
-        Queue<Process> processes = new LinkedList<>();
-        for (int i = 0; i < NUM_PROCESSES; i++) {
-            int executionTime = (int) (Math.random() * 10) + 1;
-            processes.add(new Process("Process " + i, executionTime));
-        }
-        // Run the processes using round-robin scheduling
-        while (!processes.isEmpty()) {
-            Process process = processes.poll();
-            System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ")");
-            try {
-                Thread.sleep(TIME_SLICE * 100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            process.remainingTime -= TIME_SLICE;
-            if (process.remainingTime > 0) {
-                processes.add(process);
-            }
-        }
-    }
+	private static final int NUM_PROCESSES = 5;
+	private static final int TIME_SLICE = 2;
 
-    private static class Process {
-        String name;
-        int remainingTime;
+	public static void main(String[] args) {
 
-        Process(String name, int remainingTime) {
-            this.name = name;
-            this.remainingTime = remainingTime;
-        }
-    }
+		// Create a queue of processes
+		Queue<Process> processes = new LinkedList<>();
+		for (int i = 0; i < NUM_PROCESSES; i++) {
+			int executionTime = (int) (Math.random() * 10) + 1;
+			processes.add(new Process("Process " + i, executionTime));
+		}
+		// Run the processes using round-robin scheduling
+		while (!processes.isEmpty()) {
+			Process process = processes.poll();
+			System.out.println("Running " + process.name + " (remaining time: " + process.remainingTime + ")");
+			try {
+				Thread.sleep(TIME_SLICE * 100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			process.remainingTime -= TIME_SLICE;
+			if (process.remainingTime > 0) {
+				processes.add(process);
+			}
+		}
+	}
+
+	private static class Process {
+		String name;
+		int remainingTime;
+
+		Process(String name, int remainingTime) {
+			this.name = name;
+			this.remainingTime = remainingTime;
+		}
+	}
 }

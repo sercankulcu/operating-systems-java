@@ -15,34 +15,34 @@ import java.util.Queue;
  * */
 
 public class SJFScheduling {
-    private static final int NUM_PROCESSES = 5;
+	private static final int NUM_PROCESSES = 5;
 
-    public static void main(String[] args) {
-        // Create a priority queue of processes sorted by execution time
-        Queue<Process> processes = new PriorityQueue<>(NUM_PROCESSES, (p1, p2) -> p1.executionTime - p2.executionTime);
-        for (int i = 0; i < NUM_PROCESSES; i++) {
-            int executionTime = (int) (Math.random() * 10) + 1;
-            processes.add(new Process("Process " + i, executionTime));
-        }
-        // Run the processes in order of shortest execution time
-        while (!processes.isEmpty()) {
-            Process process = processes.poll();
-            System.out.println("Running " + process.name + " (execution time: " + process.executionTime + ")");
-            try {
-                Thread.sleep(process.executionTime * 100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	public static void main(String[] args) {
+		// Create a priority queue of processes sorted by execution time
+		Queue<Process> processes = new PriorityQueue<>(NUM_PROCESSES, (p1, p2) -> p1.executionTime - p2.executionTime);
+		for (int i = 0; i < NUM_PROCESSES; i++) {
+			int executionTime = (int) (Math.random() * 10) + 1;
+			processes.add(new Process("Process " + i, executionTime));
+		}
+		// Run the processes in order of shortest execution time
+		while (!processes.isEmpty()) {
+			Process process = processes.poll();
+			System.out.println("Running " + process.name + " (execution time: " + process.executionTime + ")");
+			try {
+				Thread.sleep(process.executionTime * 100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    private static class Process {
-        String name;
-        int executionTime;
+	private static class Process {
+		String name;
+		int executionTime;
 
-        Process(String name, int executionTime) {
-            this.name = name;
-            this.executionTime = executionTime;
-        }
-    }
+		Process(String name, int executionTime) {
+			this.name = name;
+			this.executionTime = executionTime;
+		}
+	}
 }

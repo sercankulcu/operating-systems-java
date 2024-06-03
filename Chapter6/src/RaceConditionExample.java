@@ -8,27 +8,29 @@
  * */
 
 public class RaceConditionExample {
-    private static int counter = 0;
+	private static int counter = 0;
 
-    public static void main(String[] args) {
-        // Create two threads that increment the counter
-        new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                counter++;
-            }
-        }).start();
-        new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                counter++;
-            }
-        }).start();
-        // Wait for the threads to finish
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // Print the counter
-        System.out.println("Counter: " + counter);
-    }
+	public static void main(String[] args) {
+		// Create two threads that increment the counter
+		new Thread(() -> {
+			for (int i = 0; i < 100000; i++) {
+				counter++;
+			}
+		}).start();
+		
+		new Thread(() -> {
+			for (int i = 0; i < 100000; i++) {
+				counter++;
+			}
+		}).start();
+		
+		// Wait for the threads to finish
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// Print the counter
+		System.out.println("Counter: " + counter);
+	}
 }
