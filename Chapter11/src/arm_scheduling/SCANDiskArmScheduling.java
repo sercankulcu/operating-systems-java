@@ -1,4 +1,4 @@
-package Arm_Scheduling;
+package arm_scheduling;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public class SCANDiskArmScheduling {
 	 * to service a given list of requests in sorted order, using the
 	 * greedy algorithm.
 	 */
-	static int diskArmMovement(int requests[], int head) {
+	static int diskArmMovement(int[] requests, int head) {
 
 	  // Initialize the total movement
 	  int totalMovement = 0;

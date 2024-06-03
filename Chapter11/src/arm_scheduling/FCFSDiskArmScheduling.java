@@ -1,4 +1,4 @@
-package Arm_Scheduling;
+package arm_scheduling;
 
 /*
  * This code implements the First-Come, First-Served (FCFS) Disk Arm Scheduling algorithm.

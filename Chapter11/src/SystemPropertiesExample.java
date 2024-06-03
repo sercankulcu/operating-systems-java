@@ -8,7 +8,9 @@ import java.util.Properties;
  * */
 
 public class SystemPropertiesExample {
+	
     public static void main(String[] args) {
+    	
         // Get the system properties
         Properties properties = System.getProperties();
 

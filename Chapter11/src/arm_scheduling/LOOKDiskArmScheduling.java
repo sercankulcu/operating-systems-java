@@ -1,4 +1,4 @@
-package Arm_Scheduling;
+package arm_scheduling;
 
 import java.util.Arrays;
 
@@ -22,7 +22,7 @@ public class LOOKDiskArmScheduling {
 	 * This function calculates the total movement of the disk arm
 	 * to service a given list of requests in sorted order.
 	 */
-	static int diskArmMovement(int requests[], int head) {
+	static int diskArmMovement(int[] requests, int head) {
 
 	  // Initialize the total movement
 	  int totalMovement = 0;

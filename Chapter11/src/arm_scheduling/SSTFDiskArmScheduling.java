@@ -1,4 +1,4 @@
-package Arm_Scheduling;
+package arm_scheduling;
 
 /*
  * Here's an example Java code that implements Shortest Seek Time First (SSTF) Disk Arm Scheduling:
@@ -19,7 +19,7 @@ public class SSTFDiskArmScheduling {
 	 * This function calculates the total movement of the disk arm
 	 * to service a given list of requests.
 	 */
-	static int diskArmMovement(int requests[], int head) {
+	static int diskArmMovement(int[] requests, int head) {
 
 	  // Initialize the current position of the disk arm
 	  int currentPosition = head;
@@ -28,7 +28,7 @@ public class SSTFDiskArmScheduling {
 	  int totalMovement = 0;
 
 	  // Initialize a boolean array to keep track of which requests have been visited
-	  boolean visited[] = new boolean[requests.length];
+	  boolean[] visited = new boolean[requests.length];
 
 	  // Iterate over all the requests
 	  for (int i = 0; i < requests.length; i++) {
