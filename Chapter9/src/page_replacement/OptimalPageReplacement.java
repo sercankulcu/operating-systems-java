@@ -1,9 +1,11 @@
-package Page_Replacement;
+package page_replacement;
 
 import java.util.*;
 
 public class OptimalPageReplacement {
+	
 	public static void main(String[] args) {
+		
 		// Define the reference string and number of frames
 		int[] referenceString = {7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1};
     int frames = 3;

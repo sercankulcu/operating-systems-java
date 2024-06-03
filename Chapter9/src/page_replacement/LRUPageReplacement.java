@@ -1,4 +1,4 @@
-package Page_Replacement;
+package page_replacement;
 
 import java.util.LinkedHashMap;
 
@@ -15,11 +15,11 @@ import java.util.LinkedHashMap;
 
 public class LRUPageReplacement {
 
-	static int pageFaults(String reference, int numberOfPages, int numberOfFrames) {
+	static int pageFaults(String reference, int numberOfFrames) {
 
 		LinkedHashMap<String, Integer> frames = new LinkedHashMap<>(numberOfFrames, 1.0f, true);
 		int pageFaults = 0;
-		
+
 		String[] tokens = reference.split(",");
 
 		int counter = 0;
@@ -41,12 +41,11 @@ public class LRUPageReplacement {
 	}
 
 	public static void main(String[] args) {
-		
-		int numberOfPages = 8;
+
 		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1";
 		int numberOfFrames = 3;
 
-		int pageFaults = pageFaults(reference, numberOfPages, numberOfFrames);
+		int pageFaults = pageFaults(reference, numberOfFrames);
 		System.out.println("Number of page faults: " + pageFaults);
 	}
 }

@@ -1,4 +1,4 @@
-package Page_Replacement;
+package page_replacement;
 
 import java.util.ArrayList;
 
@@ -16,16 +16,16 @@ import java.util.ArrayList;
 
 public class NotFrequentlyUsedPageReplacement {
 
-	static int pageFaults(String reference, int numberOfPages, int numberOfFrames) {
+	static int pageFaults(String reference, int numberOfFrames) {
 
 		ArrayList<String> frames = new ArrayList<>(numberOfFrames);
 		int pageFaults = 0;
-		int pageCounter[] = new int[numberOfFrames];
-		
+		int[] pageCounter = new int[numberOfFrames];
+
 		String[] tokens = reference.split(",");
 
 		for (String t : tokens) {
-			
+
 			System.out.println("request to page " + t);
 			if (!frames.contains(t)) {
 				if (frames.size() < numberOfFrames) {
@@ -55,11 +55,10 @@ public class NotFrequentlyUsedPageReplacement {
 
 	public static void main(String[] args) {
 
-		int numberOfPages = 8;
 		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1";
 		int numberOfFrames = 4;
 
-		int pageFaults = pageFaults(reference, numberOfPages, numberOfFrames);
+		int pageFaults = pageFaults(reference, numberOfFrames);
 		System.out.println("Number of page faults: " + pageFaults);
 	}
 }

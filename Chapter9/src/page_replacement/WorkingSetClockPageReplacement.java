@@ -1,4 +1,4 @@
-package Page_Replacement;
+package page_replacement;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package Page_Replacement;
+package page_replacement;
 import java.util.LinkedList;
 
 /*
@@ -10,7 +10,7 @@ import java.util.Queue;
 
 public class WorkingSetPageReplacement {
 
-	static int pageFaults(String reference, int numberOfPages, int numberOfFrames) {
+	static int pageFaults(String reference, int numberOfFrames) {
 		// Create a queue to store the pages in memory
 		Queue<Page> frames = new LinkedList<>();
 		int pageFaults = 0;
@@ -67,7 +67,7 @@ public class WorkingSetPageReplacement {
 		String reference = "7,0,1,2,0,3,0,4,2,3,0,3,0,3,2,1,2,0,1,7,0,1";
 		int numberOfFrames = 4;
 
-		int pageFaults = pageFaults(reference, numberOfPages, numberOfFrames);
+		int pageFaults = pageFaults(reference, numberOfFrames);
 		System.out.println("Number of page faults: " + pageFaults);
 	}
 
