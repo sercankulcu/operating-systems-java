@@ -11,12 +11,14 @@
  * */
 
 public class StarvationDeadlock {
+	
     static class Resource {
         private String name;
         public Resource(String name) {
             this.name = name;
         }
     }
+    
     static class Task implements Runnable {
         private Resource[] resources;
         public Task(Resource[] resources) {
@@ -36,11 +38,14 @@ public class StarvationDeadlock {
             }
         }
     }
+    
     public static void main(String[] args) {
         Resource[] resources = new Resource[]{new Resource("Resource 1"), new Resource("Resource 2"), new Resource("Resource 3")};
+        
         Task task1 = new Task(new Resource[]{resources[0], resources[1]});
         Task task2 = new Task(new Resource[]{resources[1], resources[2]});
         Task task3 = new Task(new Resource[]{resources[2], resources[0]});
+        
         new Thread(task1, "Task 1").start();
         new Thread(task2, "Task 2").start();
         new Thread(task3, "Task 3").start();

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShortestProcessNextScheduling {
+	
 	static class Process {
 		int processId;
 		int burstTime;
@@ -28,6 +29,7 @@ public class ShortestProcessNextScheduling {
 
 	public static void main(String[] args) {
 		List<Process> processList = new ArrayList<>();
+		
 		processList.add(new Process(1, 10));
 		processList.add(new Process(2, 5));
 		processList.add(new Process(3, 8));

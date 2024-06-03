@@ -42,6 +42,7 @@ public class DeadlockDetectionExample {
 				}
 			}
 		});
+
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -82,7 +83,7 @@ public class DeadlockDetectionExample {
 					ThreadInfo[] threadInfos = threadMXBean.getThreadInfo(threadIds);
 					System.out.println("Deadlock detected!");
 					for (ThreadInfo threadInfo : threadInfos) {
-						System.out.println(threadInfo);
+						System.out.print(threadInfo);
 					}
 				}
 

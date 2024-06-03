@@ -12,53 +12,56 @@
  * */
 
 public class DeadlockExample {
-    public static void main(String[] args) {
-        // Create the two objects
-        Object object1 = new Object();
-        Object object2 = new Object();
 
-        // Create the two threads
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Acquire the lock on object1
-                synchronized (object1) {
-                    try {
-                        // Sleep for a moment
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+	public static void main(String[] args) {
 
-                    // Try to acquire the lock on object2
-                    synchronized (object2) {
-                        // Do something with object1 and object2
-                    }
-                }
-            }
-        });
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Acquire the lock on object2
-                synchronized (object2) {
-                    try {
-                        // Sleep for a moment
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+		// Create the two objects
+		Object object1 = new Object();
+		Object object2 = new Object();
 
-                    // Try to acquire the lock on object1
-                    synchronized (object1) {
-                        // Do something with object1 and object2
-                    }
-                }
-            }
-        });
+		// Create the two threads
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Acquire the lock on object1
+				synchronized (object1) {
+					try {
+						// Sleep for a moment
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 
-        // Start the threads
-        thread1.start();
-        thread2.start();
-    }
+					// Try to acquire the lock on object2
+					synchronized (object2) {
+						// Do something with object1 and object2
+					}
+				}
+			}
+		});
+
+		Thread thread2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// Acquire the lock on object2
+				synchronized (object2) {
+					try {
+						// Sleep for a moment
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+					// Try to acquire the lock on object1
+					synchronized (object1) {
+						// Do something with object1 and object2
+					}
+				}
+			}
+		});
+
+		// Start the threads
+		thread1.start();
+		thread2.start();
+	}
 }
