@@ -13,7 +13,9 @@ import java.io.IOException;
  * */
 
 public class FileOperationsExample {
+	
 	public static void main(String[] args) {
+		
 		// Create a new file in the current directory
 		File file = new File("test.txt");
 		try {

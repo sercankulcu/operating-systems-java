@@ -11,30 +11,32 @@ import java.io.File;
  * */
 
 public class DirectoryOperationsExample {
-    public static void main(String[] args) {
-        // Create a new directory in the current directory
-        File directory = new File("new_directory");
-        boolean created = directory.mkdir();
-        if (created) {
-            System.out.println("Directory created: " + directory.getName());
-        } else {
-            System.out.println("Directory creation failed");
-        }
 
-        // List the contents of the current directory
-        File currentDirectory = new File(".");
-        String[] fileList = currentDirectory.list();
-        System.out.println("Contents of current directory:");
-        for (String fileName : fileList) {
-            System.out.println(fileName);
-        }
+	public static void main(String[] args) {
 
-        // Delete the new directory
-        boolean deleted = directory.delete();
-        if (deleted) {
-            System.out.println("Directory deleted: " + directory.getName());
-        } else {
-            System.out.println("Directory delete failed");
-        }
-    }
+		// Create a new directory in the current directory
+		File directory = new File("new_directory");
+		boolean created = directory.mkdir();
+		if (created) {
+			System.out.println("Directory created: " + directory.getName());
+		} else {
+			System.out.println("Directory creation failed");
+		}
+
+		// List the contents of the current directory
+		File currentDirectory = new File(".");
+		String[] fileList = currentDirectory.list();
+		System.out.println("Contents of current directory:");
+		for (String fileName : fileList) {
+			System.out.println(fileName);
+		}
+
+		// Delete the new directory
+		boolean deleted = directory.delete();
+		if (deleted) {
+			System.out.println("Directory deleted: " + directory.getName());
+		} else {
+			System.out.println("Directory delete failed");
+		}
+	}
 }

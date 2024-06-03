@@ -8,7 +8,7 @@ import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 
 /*
- * Here's an updated code that demonstrates how to use the javax.imageio package to perform JPEG compression in Java:
+ * Here's the demonstration how to use the javax.imageio package to perform JPEG compression in Java:
  * 
  * In this code, we use the ImageWriter and ImageWriteParam classes from the javax.imageio 
  * package to perform the JPEG compression. The compressImage method takes as input an original 
@@ -20,7 +20,9 @@ import javax.imageio.stream.FileImageOutputStream;
  * */
 
 public class JPEGCompression {
+	
     public static void main(String[] args) {
+    	
         BufferedImage originalImage = null;
         try {
             originalImage = ImageIO.read(new File("input.jpg"));

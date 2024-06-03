@@ -17,11 +17,9 @@ import javax.swing.JPanel;
 
 public class PictureDrawingExample extends JPanel {
 
-  /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void paintComponent(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
 

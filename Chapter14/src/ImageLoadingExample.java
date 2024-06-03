@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 public class ImageLoadingExample {
 
   public static void main(String[] args) {
+  	
     try {
       Image image = ImageIO.read(new File("input.jpg"));
       JLabel label = new JLabel(new ImageIcon(image));

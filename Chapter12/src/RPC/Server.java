@@ -21,8 +21,8 @@ public class Server extends UnicastRemoteObject implements RemoteInterface {
 
 	public static void main(String[] args) {
 		try {
-			Naming.rebind("//localhost/MyServer", new Server());
-			System.err.println("Server ready");
+			Naming.rebind("MyServer", new Server());
+			System.out.println("Server ready");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

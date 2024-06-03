@@ -17,24 +17,24 @@ import java.io.IOException;
  * */
 
 public class PageBufferExample {
-    private static final int PAGE_SIZE = 1000;
+	private static final int PAGE_SIZE = 1000;
 
-    public static void main(String[] args) {
-        String filePath = "data.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            char[] buffer = new char[PAGE_SIZE];
-            int numChars;
-            while ((numChars = reader.read(buffer)) != -1) {
-                String page = new String(buffer, 0, numChars);
-                // Process the page of data
-                processPage(page);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public static void main(String[] args) {
+		String filePath = "data.txt";
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			char[] buffer = new char[PAGE_SIZE];
+			int numChars;
+			while ((numChars = reader.read(buffer)) != -1) {
+				String page = new String(buffer, 0, numChars);
+				// Process the page of data
+				processPage(page);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private static void processPage(String page) {
-        // Perform some operation on the page of data
-    }
+	private static void processPage(String page) {
+		// Perform some operation on the page of data
+	}
 }
