@@ -31,7 +31,7 @@ public class ForkExample extends RecursiveAction {
 	protected void compute() {
 		if (end - start <= THRESHOLD) {
 			// perform some work here
-			System.out.println("computing start: " + start + " end: " + end);
+			System.out.println("Thread: " + Thread.currentThread().getId() + ", computing start: " + start + ", end: " + end);
 		} else {
 			int middle = (start + end) / 2;
 			ForkExample leftTask = new ForkExample(array, start, middle);
@@ -43,9 +43,10 @@ public class ForkExample extends RecursiveAction {
 	}
 
 	public static void main(String[] args) {
-		int[] array = new int[16*1024];
-		ForkJoinPool pool = new ForkJoinPool();
-		ForkExample task = new ForkExample(array, 0, array.length);
-		pool.invoke(task);
+		int[] array = new int[16*THRESHOLD];
+		try (ForkJoinPool pool = new ForkJoinPool()) {
+			ForkExample task = new ForkExample(array, 0, array.length);
+			pool.invoke(task);
+		}
 	}
 }
