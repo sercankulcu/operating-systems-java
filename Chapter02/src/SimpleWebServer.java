@@ -17,7 +17,9 @@ import java.net.Socket;
  * */
 
 public class SimpleWebServer {
+	
   public static void main(String[] args) throws IOException {
+	  
     @SuppressWarnings("resource")
 		ServerSocket server = new ServerSocket(8080);
     System.out.println("Listening for connections on port 8080");

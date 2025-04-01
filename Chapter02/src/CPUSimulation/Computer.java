@@ -717,17 +717,19 @@ public class Computer
 
         for (Process process : processes){
             waitSum = 0;
-            for(int i = 0; i<process.getWaitTimeArrayList().size(); i++){
+            for(int i = 0; i < process.getWaitTimeArrayList().size(); i++){
                 waitSum += process.getWaitTimeArrayList().get(i);
             }
-            waitSum = waitSum/process.getWaitTimeArrayList().size();
+            if(process.getWaitTimeArrayList().size() != 0)
+            	waitSum /= process.getWaitTimeArrayList().size();
+            	
             averagePerProcess.add(0,waitSum);
         }
 
         for (Double perProcess : averagePerProcess) {
             average += perProcess;
+            
         }
-
         average /= averagePerProcess.size();
         System.out.println("The average wait time is "+ average + " time units.");
     }

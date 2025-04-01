@@ -35,8 +35,8 @@ public class Process implements Comparable<Object>{
         waitTimeTimer = 0;
         waitTimeArrayList = new ArrayList<>();
         turnaroundPerProcess = 0;
-        nbIORequests =0;
-        CpuResponse =false;
+        nbIORequests = 0;
+        CpuResponse = false;
         CpuResponseTime = 0;
         remainingTime = totalExecutionTime - executionTime;
     }
@@ -53,7 +53,7 @@ public class Process implements Comparable<Object>{
         waitTimeTimer = 0;
         waitTimeArrayList = new ArrayList<>();
         turnaroundPerProcess = 0;
-        nbIORequests =0;
+        nbIORequests = 0;
         CpuResponse = false;
         CpuResponseTime = 0;
         remainingTime = totalExecutionTime - executionTime;
@@ -145,5 +145,4 @@ public class Process implements Comparable<Object>{
         int arrivalTimeToCompare = ((Process)process).arrivalTime;
         return this.arrivalTime - arrivalTimeToCompare;
     }
-
 }

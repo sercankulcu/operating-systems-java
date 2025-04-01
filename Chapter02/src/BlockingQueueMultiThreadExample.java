@@ -36,7 +36,7 @@ public class BlockingQueueMultiThreadExample {
 					if (userInput == 0) {
 						break; // Exit thread when user enters 0
 					}
-					Thread.sleep(10000);
+					Thread.sleep(3000);
 					String binaryString = Integer.toBinaryString(userInput);
 					binaryQueue.put(binaryString);
 				} catch (InterruptedException e) {

@@ -23,7 +23,7 @@ public class BinaryConverter {
 				// Convert to binary string
 				int inputNumber = Integer.parseInt(userInput);
 				String binaryString = convertToBinary(inputNumber);
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 				// Print the binary string
 				System.out.println("Binary representation: " + binaryString);
 			} catch (NumberFormatException e) {

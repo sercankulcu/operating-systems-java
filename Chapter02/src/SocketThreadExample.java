@@ -1,5 +1,4 @@
 
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,6 +7,7 @@ import java.util.Scanner;
 public class SocketThreadExample {
 
 	public static void main(String[] args) throws InterruptedException {
+		
 		Thread inputThread = new Thread(() -> {
 			try (Scanner scanner = new Scanner(System.in)) {
 				try (Socket clientSocket = new Socket("localhost", 12345);
