@@ -16,29 +16,63 @@ import java.io.PipedOutputStream;
  * */
 
 public class PipeThreadExample {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         // Create the pipes
         PipedInputStream in = new PipedInputStream();
         PipedOutputStream out = new PipedOutputStream(in);
 
-        // Create the child process
-        new Thread(() -> {
+        // Create the child process (writer)
+        Thread writerThread = new Thread(() -> {
             try {
-                // Send message through the pipe
-                out.write("Hello from the child process!".getBytes());
+                // Send multiple messages with delays
+                for (int i = 0; i < 5; i++) {
+                    String message = "Message " + i + " from child process!\n";
+                    out.write(message.getBytes());
+                    Thread.sleep(500); // Simulate some processing time
+                }
+                out.write("END".getBytes()); //Signal the end of transmission.
                 out.close();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Create the parent process (reader)
+        Thread readerThread = new Thread(() -> {
+            try {
+                int ch;
+                StringBuilder message = new StringBuilder();
+                System.out.println("Received char: ");
+                while (true) {
+                    ch = in.read();
+                    if (ch == -1) {
+                        break;
+                    }
+                    message.append((char) ch);
+                    System.out.print((char)ch);
+
+                    if(message.toString().endsWith("END")){
+                        message.delete(message.length()-3, message.length()); //remove end signal.
+                        break;
+                    }
+
+                }
+                in.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
+        });
 
-        // Read message from the pipe
-        int ch;
-        StringBuilder message = new StringBuilder();
-        while ((ch = in.read()) != -1) {
-            message.append((char) ch);
-        }
-        in.close();
-        System.out.println(message);
+        // Start the threads
+        writerThread.start();
+        readerThread.start();
+
+        // Wait for the threads to finish
+        writerThread.join();
+        readerThread.join();
+
+        System.out.println("\nCommunication complete.");
     }
 }

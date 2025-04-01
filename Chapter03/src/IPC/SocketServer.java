@@ -16,7 +16,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class SocketServer {
+	
     public static void main(String[] args) {
+    	
         try (ServerSocket server = new ServerSocket(8000)) {
             while (true) {
                 try (Socket socket = server.accept()) {

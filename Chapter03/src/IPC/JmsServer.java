@@ -5,6 +5,7 @@ import javax.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class JmsServer implements Runnable, ExceptionListener {
+	
 	public void run() {
 		try {
 

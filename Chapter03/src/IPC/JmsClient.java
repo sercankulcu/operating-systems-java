@@ -5,6 +5,7 @@ import javax.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class JmsClient implements Runnable {
+	
 	public void run() {
 		try {
 			// Create a ConnectionFactory
@@ -29,7 +30,7 @@ public class JmsClient implements Runnable {
 			TextMessage message = session.createTextMessage(text);
 
 			// Tell the producer to send the message
-			System.out.println("Sent message: "+ message.hashCode() + " : " + Thread.currentThread().getName());
+			System.out.println("Sent message: " + message.hashCode() + " : " + Thread.currentThread().getName());
 			producer.send(message);
 
 			// Clean up

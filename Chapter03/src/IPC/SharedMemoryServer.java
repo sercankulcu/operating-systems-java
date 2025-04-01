@@ -17,7 +17,9 @@ import java.nio.channels.FileChannel;
  * */
 
 public class SharedMemoryServer {
+	
     public static void main(String[] args) {
+    	
         try (RandomAccessFile memoryFile = new RandomAccessFile("shared_memory.bin", "rw")) {
             FileChannel fc = memoryFile.getChannel();
             MappedByteBuffer buffer = fc.map(FileChannel.MapMode.READ_WRITE, 0, 1024);

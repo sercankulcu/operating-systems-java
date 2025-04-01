@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /*
  * Another important concept in operating systems is process management. You can use the 
@@ -11,14 +13,25 @@ import java.io.IOException;
  * */
 
 public class ProcessBuilderExample {
+
     public static void main(String[] args) {
         ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "dir");
         pb.directory(new File("C:/Users/"));
         pb.redirectErrorStream(true);
+
         try {
             Process p = pb.start();
+
+            // Read the output of the process
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
             p.waitFor();
             System.out.println("Exit code: " + p.exitValue());
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
