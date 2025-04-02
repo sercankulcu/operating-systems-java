@@ -1,102 +1,81 @@
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.BrokenBarrierException;
 
-class Computation1 implements Runnable
-{
-	public static int product = 0;
+/*
+ * This program demonstrates the use of CyclicBarrier in Java.
+ * Multiple worker threads will wait at a barrier until all reach it,
+ * then proceed together. The barrier can be reused (cyclic).
+ */
+public class CyclicBarrierDemo {
+    
+    // Number of threads that need to reach the barrier
+    private static final int NUMBER_OF_THREADS = 3;
+    
+    // CyclicBarrier instance with a barrier action that runs when all threads arrive
+    private static final CyclicBarrier barrier = new CyclicBarrier(NUMBER_OF_THREADS, () -> {
+        System.out.println("All threads have reached the barrier. Proceeding together!");
+    });
 
-	public void run()
-	{
-		product = 2 * 3;
-		try
-		{
-			CyclicBarrierDemo.newBarrier.await();
-		}
-		catch (InterruptedException | BrokenBarrierException e)
-		{
-			e.printStackTrace();
-		}
-	}
-}
+    // Worker thread class that simulates some work and waits at the barrier
+    static class Worker implements Runnable {
+        private final String name;
+        
+        public Worker(String name) {
+            this.name = name;
+        }
 
-class Computation2 implements Runnable
-{
-	public static int sum = 0;
-	public void run()
-	{
-		// check if newBarrier is broken or not
-		System.out.println("Is the barrier broken? - " + CyclicBarrierDemo.newBarrier.isBroken());
-		sum = 11 + 20;
-		try
-		{
-			CyclicBarrierDemo.newBarrier.await(3000, TimeUnit.MILLISECONDS);
+        @Override
+        public void run() {
+            try {
+                // Simulate some initial work
+                System.out.println(name + " is doing initial work...");
+                Thread.sleep((long) (Math.random() * 2000)); // Random delay 0-2 seconds
+                
+                // Reach the barrier and wait for others
+                System.out.println(name + " has reached the barrier, waiting...");
+                barrier.await();
+                
+                // This code runs after all threads pass the barrier
+                System.out.println(name + " has passed the barrier and is continuing work...");
+                Thread.sleep((long) (Math.random() * 1000)); // Random delay 0-1 second
+                
+                // Demonstrate cyclic nature by reaching barrier again
+                System.out.println(name + " has reached the barrier again, waiting...");
+                barrier.await();
+                
+                // Final work after second barrier
+                System.out.println(name + " has completed all work!");
+                
+            } catch (InterruptedException e) {
+                System.out.println(name + " was interrupted!");
+                Thread.currentThread().interrupt();
+            } catch (BrokenBarrierException e) {
+                System.out.println(name + " encountered a broken barrier!");
+            }
+        }
+    }
 
-			// number of parties waiting at the barrier
-			System.out.println("Number of parties waiting at the barrier "+
-					"at this point = " + CyclicBarrierDemo.newBarrier.getNumberWaiting());
-		}
-		catch (InterruptedException | BrokenBarrierException e)
-		{
-			e.printStackTrace();
-		}
-		catch (TimeoutException e)
-		{
-			e.printStackTrace();
-		}
-	}
-}
-
-
-public class CyclicBarrierDemo implements Runnable
-{
-	public static CyclicBarrier newBarrier = new CyclicBarrier(3);
-
-	public static void main(String[] args)
-	{
-		// parent thread
-		CyclicBarrierDemo test = new CyclicBarrierDemo();
-
-		Thread t1 = new Thread(test);
-		t1.start();
-	}
-	
-	public void run()
-	{
-		System.out.println("Number of parties required to trip the barrier = "+
-				newBarrier.getParties());
-		System.out.println("Sum of product and sum = " + (Computation1.product +
-				Computation2.sum));
-
-		// objects on which the child thread has to run
-		Computation1 comp1 = new Computation1();
-		Computation2 comp2 = new Computation2();
-
-		// creation of child thread
-		Thread t1 = new Thread(comp1);
-		Thread t2 = new Thread(comp2);
-
-		// moving child thread to runnable state
-		t1.start();
-		t2.start();
-
-		try
-		{
-			CyclicBarrierDemo.newBarrier.await();
-		}
-		catch (InterruptedException | BrokenBarrierException e)
-		{
-			e.printStackTrace();
-		}
-
-		// barrier breaks as the number of thread waiting for the barrier
-		// at this point = 3
-		System.out.println("Sum of product and sum = " + (Computation1.product +
-				Computation2.sum));
-
-		// Resetting the newBarrier
-		newBarrier.reset();
-		System.out.println("Barrier reset successful");
-	}
+    public static void main(String[] args) {
+        // Create an array to hold our worker threads
+        Thread[] threads = new Thread[NUMBER_OF_THREADS];
+        
+        // Initialize and start worker threads
+        for (int i = 0; i < NUMBER_OF_THREADS; i++) {
+            threads[i] = new Thread(new Worker("Worker-" + (i + 1)));
+            threads[i].start();
+        }
+        
+        // Wait for all threads to complete
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                System.out.println("Main thread interrupted while waiting!");
+                Thread.currentThread().interrupt();
+            }
+        }
+        
+        // Final message when all threads are done
+        System.out.println("All workers have completed their tasks!");
+    }
 }

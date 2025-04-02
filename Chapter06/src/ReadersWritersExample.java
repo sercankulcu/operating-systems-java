@@ -1,87 +1,139 @@
 import java.util.concurrent.Semaphore;
 
 /*
- * Here is an example of a Java program that demonstrates the "readers-writers" problem, 
- * a classic concurrency problem in computer science:
- * 
- * This program defines two classes: Reader and Writer, which represent the threads that will 
- * be reading and writing to a shared resource. The main method creates four threads (two readers 
- * and two writers) and starts them. 
- * 
- * The Reader class uses a semaphore mutex to control access to the shared readCount variable, 
- * which keeps track of the number of readers currently accessing the shared resource. The Writer 
- * class uses a semaphore writeLock to block writers while any readers are accessing the resource.
- * 
- * */
+ * This program demonstrates the Readers-Writers problem, a classic concurrency challenge.
+ * Multiple reader threads can read a shared resource simultaneously, but writer threads
+ * require exclusive access. Semaphores are used to synchronize access:
+ * - Readers can read concurrently but block writers when active.
+ * - Writers have exclusive access, blocking all readers and other writers.
+ */
+public class ReadersWritersExample {
 
-class ReadersWritersExample {
+    // Shared variables for synchronization and resource tracking
+    private static int readCount = 0;                // Number of active readers
+    private static final Semaphore mutex = new Semaphore(1);      // Protects readCount
+    private static final Semaphore writeLock = new Semaphore(1);  // Controls write access
+    private static int sharedResource = 0;           // Simulated shared resource (e.g., a counter)
+    private static final int MAX_VALUE = 10;         // Max value for writers to increment to
 
-  static int readCount = 0;
-  static Semaphore mutex = new Semaphore(1);
-  static Semaphore writeLock = new Semaphore(1);
+    // Reader class representing threads that read the shared resource
+    static class Reader implements Runnable {
+        private final String name;
 
-  static class Reader implements Runnable {
-    @Override
-    public void run() {
-      try {
-        // acquire lock
-        mutex.acquire();
-        readCount++;
-        if (readCount == 1) {
-          // if this is the first reader, block the writers
-          writeLock.acquire();
+        public Reader(String name) {
+            this.name = name;
         }
-        // release lock
-        mutex.release();
 
-        // reading is happening here
-        System.out.println("Reader is reading");
-        Thread.sleep(1000);
+        @Override
+        public void run() {
+            try {
+                for (int i = 0; i < 3; i++) { // Each reader reads 3 times
+                    // Acquire mutex to update readCount safely
+                    mutex.acquire();
+                    readCount++;
+                    if (readCount == 1) {
+                        // First reader blocks writers by acquiring writeLock
+                        writeLock.acquire();
+                        System.out.println(name + " blocked writers (first reader).");
+                    }
+                    mutex.release();
 
-        // acquire lock
-        mutex.acquire();
-        readCount--;
-        if (readCount == 0) {
-          // if this is the last reader, release the lock for the writers
-          writeLock.release();
+                    // Critical section: reading the shared resource
+                    System.out.println(name + " is reading: sharedResource = " + sharedResource);
+                    Thread.sleep((long) (Math.random() * 1000)); // Simulate reading time (0-1s)
+
+                    // Acquire mutex to update readCount on exit
+                    mutex.acquire();
+                    readCount--;
+                    System.out.println(name + " finished reading, active readers: " + readCount);
+                    if (readCount == 0) {
+                        // Last reader releases writeLock, allowing writers
+                        writeLock.release();
+                        System.out.println(name + " unblocked writers (last reader).");
+                    }
+                    mutex.release();
+
+                    // Simulate time between reads
+                    Thread.sleep((long) (Math.random() * 500)); // Random delay 0-500ms
+                }
+            } catch (InterruptedException e) {
+                System.out.println(name + " interrupted!");
+                Thread.currentThread().interrupt();
+            }
         }
-        // release lock
-        mutex.release();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
     }
-  }
 
-  static class Writer implements Runnable {
-    @Override
-    public void run() {
-      try {
-        // acquire lock
-        writeLock.acquire();
+    // Writer class representing threads that modify the shared resource
+    static class Writer implements Runnable {
+        private final String name;
 
-        // writing is happening here
-        System.out.println("Writer is writing");
-        Thread.sleep(1000);
+        public Writer(String name) {
+            this.name = name;
+        }
 
-        // release lock
-        writeLock.release();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
+        @Override
+        public void run() {
+            try {
+                for (int i = 0; i < 3; i++) { // Each writer writes 3 times
+                    // Acquire writeLock for exclusive access
+                    writeLock.acquire();
+                    System.out.println(name + " acquired write lock.");
+
+                    // Critical section: writing to the shared resource
+                    if (sharedResource < MAX_VALUE) {
+                        sharedResource++;
+                        System.out.println(name + " is writing: sharedResource = " + sharedResource);
+                    } else {
+                        System.out.println(name + " found max value reached: " + sharedResource);
+                    }
+                    Thread.sleep((long) (Math.random() * 1000)); // Simulate writing time (0-1s)
+
+                    // Release writeLock after writing
+                    writeLock.release();
+                    System.out.println(name + " released write lock.");
+
+                    // Simulate time between writes
+                    Thread.sleep((long) (Math.random() * 500)); // Random delay 0-500ms
+                }
+            } catch (InterruptedException e) {
+                System.out.println(name + " interrupted!");
+                Thread.currentThread().interrupt();
+            }
+        }
     }
-  }
 
-  public static void main(String[] args) {
-  	
-    Thread reader1 = new Thread(new Reader());
-    Thread reader2 = new Thread(new Reader());
-    Thread writer1 = new Thread(new Writer());
-    Thread writer2 = new Thread(new Writer());
+    public static void main(String[] args) {
+        // Define number of readers and writers
+        int numReaders = 3;
+        int numWriters = 2;
+        Thread[] threads = new Thread[numReaders + numWriters];
 
-    reader1.start();
-    reader2.start();
-    writer1.start();
-    writer2.start();
-  }
+        // Create and start reader threads
+        for (int i = 0; i < numReaders; i++) {
+            threads[i] = new Thread(new Reader("Reader-" + (i + 1)));
+            threads[i].start();
+            System.out.println("Started " + threads[i].getName());
+        }
+
+        // Create and start writer threads
+        for (int i = 0; i < numWriters; i++) {
+            threads[numReaders + i] = new Thread(new Writer("Writer-" + (i + 1)));
+            threads[numReaders + i].start();
+            System.out.println("Started " + threads[numReaders + i].getName());
+        }
+
+        // Wait for all threads to finish
+        for (Thread thread : threads) {
+            try {
+                thread.join(); // Wait for this thread to complete
+            } catch (InterruptedException e) {
+                System.out.println("Main thread interrupted while waiting!");
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+
+        // Print final state of the shared resource
+        System.out.println("\nSimulation completed! Final sharedResource value: " + sharedResource);
+    }
 }
