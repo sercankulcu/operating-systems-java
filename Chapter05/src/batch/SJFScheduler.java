@@ -14,10 +14,12 @@ import java.util.Queue;
  * 
  * */
 
-public class SJFScheduling {
-	private static final int NUM_PROCESSES = 5;
+public class SJFScheduler {
+	
+	private static final int NUM_PROCESSES = 7;
 
 	public static void main(String[] args) {
+		
 		// Create a priority queue of processes sorted by execution time
 		Queue<Process> processes = new PriorityQueue<>(NUM_PROCESSES, (p1, p2) -> p1.executionTime - p2.executionTime);
 		for (int i = 0; i < NUM_PROCESSES; i++) {
