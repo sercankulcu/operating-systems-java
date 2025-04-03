@@ -6,47 +6,104 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
+import java.util.Iterator;
 
-/*
- * Here's the demonstration how to use the javax.imageio package to perform JPEG compression in Java:
- * 
- * In this code, we use the ImageWriter and ImageWriteParam classes from the javax.imageio 
- * package to perform the JPEG compression. The compressImage method takes as input an original 
- * BufferedImage, the desired compression quality (as a float value between 0 and 1), and the 
- * output file path. The method creates a new FileImageOutputStream object and sets the 
- * ImageWriter to write to it. Then, it calls the write method of the ImageWriter to write the 
- * compressed image to the output file.
- * 
- * */
-
+/**
+ * This class demonstrates JPEG image compression using the javax.imageio package.
+ * It provides functionality to load an image and compress it with a specified quality level.
+ */
 public class JPEGCompression {
-	
+    
+    // Constants for default values
+    private static final String DEFAULT_INPUT = "input.jpg";
+    private static final String DEFAULT_OUTPUT = "output.jpg";
+    private static final float DEFAULT_QUALITY = 0.5f;
+
+    /**
+     * Main method to demonstrate image compression functionality
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
-    	
-        BufferedImage originalImage = null;
         try {
-            originalImage = ImageIO.read(new File("input.jpg"));
+            // Load the original image from file
+            BufferedImage originalImage = loadImage(DEFAULT_INPUT);
+            
+            // Validate image loading
+            if (originalImage == null) {
+                throw new IOException("Failed to load input image");
+            }
+            
+            // Compress the image with default quality
+            compressImage(originalImage, DEFAULT_QUALITY, DEFAULT_OUTPUT);
+            
+            // Print success message
+            System.out.println("Image compression completed successfully");
+            System.out.println("Output saved as: " + DEFAULT_OUTPUT);
+            
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // convert the image to a different image format with lower quality
-        float quality = 0.5f; // compression level (0.0f = worst, 1.0f = best)
-        try {
-            JPEGCompression.compressImage(originalImage, quality, "output.jpg");
-        } catch (IOException e) {
+            // Handle and report any errors during processing
+            System.err.println("Error during image compression: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public static void compressImage(BufferedImage originalImage, float quality, String outputPath) throws IOException {
-        ImageWriter writer = ImageIO.getImageWritersByFormatName("jpeg").next();
-        ImageWriteParam param = writer.getDefaultWriteParam();
-        param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality(quality);
-        try (FileImageOutputStream fios = new FileImageOutputStream(new File(outputPath))) {
-            writer.setOutput(fios);
-            writer.write(null, new IIOImage(originalImage, null, null), param);
+    /**
+     * Loads an image from the specified file path
+     * @param inputPath Path to the input image file
+     * @return BufferedImage object containing the loaded image
+     * @throws IOException if the image cannot be read
+     */
+    private static BufferedImage loadImage(String inputPath) throws IOException {
+        File inputFile = new File(inputPath);
+        // Check if file exists before attempting to read
+        if (!inputFile.exists()) {
+            throw new IOException("Input file not found: " + inputPath);
         }
-        writer.dispose();
+        return ImageIO.read(inputFile);
+    }
+
+    /**
+     * Compresses an image using JPEG compression with specified quality
+     * @param originalImage The source image to compress
+     * @param quality Compression quality (0.0f to 1.0f)
+     * @param outputPath Path where the compressed image will be saved
+     * @throws IOException if compression or file writing fails
+     * @throws IllegalArgumentException if quality is out of range
+     */
+    public static void compressImage(BufferedImage originalImage, float quality, String outputPath) 
+            throws IOException {
+        // Validate input parameters
+        if (originalImage == null) {
+            throw new IllegalArgumentException("Original image cannot be null");
+        }
+        if (quality < 0.0f || quality > 1.0f) {
+            throw new IllegalArgumentException("Quality must be between 0.0 and 1.0");
+        }
+
+        // Get available JPEG writer
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpeg");
+        if (!writers.hasNext()) {
+            throw new IOException("No JPEG writers available");
+        }
+        ImageWriter writer = writers.next();
+
+        try {
+            // Configure compression parameters
+            ImageWriteParam param = writer.getDefaultWriteParam();
+            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            param.setCompressionQuality(quality);
+
+            // Write the compressed image to file
+            File outputFile = new File(outputPath);
+            try (FileImageOutputStream fios = new FileImageOutputStream(outputFile)) {
+                writer.setOutput(fios);
+                IIOImage iioImage = new IIOImage(originalImage, null, null);
+                writer.write(null, iioImage, param);
+                fios.flush();
+            }
+        } finally {
+            // Clean up resources
+            writer.dispose();
+        }
     }
 }

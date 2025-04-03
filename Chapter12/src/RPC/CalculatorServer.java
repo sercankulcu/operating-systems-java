@@ -11,7 +11,12 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class CalculatorServer extends UnicastRemoteObject implements Calculator {
     
-    // Constructor must throw RemoteException due to UnicastRemoteObject
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -265598959749550578L;
+
+	// Constructor must throw RemoteException due to UnicastRemoteObject
     public CalculatorServer() throws RemoteException {
         super();  // Call the superclass constructor
     }
