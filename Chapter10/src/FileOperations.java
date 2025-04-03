@@ -12,7 +12,7 @@ import java.io.IOException;
  * "test2.txt", copies it to a new file called "test3.txt", and then deletes the new file.
  * */
 
-public class FileOperationsExample {
+public class FileOperations {
 	
 	public static void main(String[] args) {
 		
@@ -81,6 +81,20 @@ public class FileOperationsExample {
 			System.out.println("File deleted: " + file3.getName());
 		} else {
 			System.out.println("File delete failed");
+		}
+		
+		deleted = file2.delete();
+		if (deleted) {
+			System.out.println("File deleted: " + file2.getName());
+		} else {
+			System.out.println("File delete failed");
+		}
+		
+		deleted = file.delete();
+		if (deleted) {
+			System.out.println("File deleted: " + file.getName());
+		} else {
+			System.out.println("File delete failed: " + file.getName());
 		}
 	}
 }

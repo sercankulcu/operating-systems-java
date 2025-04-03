@@ -1,3 +1,16 @@
+This is a sample text file for testing the PageBufferExample program.
+It contains multiple lines of text to demonstrate page-by-page reading.
+
+Line 3: Here's some sample data
+Line 4: Numbers: 12345
+Line 5: Special characters: !@#$%^&*
+
+This is a new paragraph with more content.
+The file will be read in pages of 1000 characters,
+though this sample is smaller than that.
+
+Final line of the sample text file.
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
