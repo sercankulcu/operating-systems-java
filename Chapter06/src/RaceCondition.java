@@ -4,7 +4,7 @@
  * the final value is unpredictable due to race conditions. With synchronization, the result
  * is consistent and correct.
  */
-public class RaceConditionExample {
+public class RaceCondition {
     // Shared counter variable accessed by multiple threads
     private static int counter = 0;
     

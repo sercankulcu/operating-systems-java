@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
  * - Readers can read concurrently but block writers when active.
  * - Writers have exclusive access, blocking all readers and other writers.
  */
-public class ReadersWritersExample {
+public class ReadersWriters {
 
     // Shared variables for synchronization and resource tracking
     private static int readCount = 0;                // Number of active readers

@@ -6,7 +6,7 @@ import java.util.concurrent.BrokenBarrierException;
  * Multiple worker threads will wait at a barrier until all reach it,
  * then proceed together. The barrier can be reused (cyclic).
  */
-public class CyclicBarrierDemo {
+public class CyclicBarrierr{
     
     // Number of threads that need to reach the barrier
     private static final int NUMBER_OF_THREADS = 3;

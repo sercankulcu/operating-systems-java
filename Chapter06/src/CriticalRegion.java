@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * This program shows how to use locks to protect shared resources in a multi-threaded environment.
  * Two threads will concurrently increment a shared counter, and the Lock ensures thread safety.
  */
-public class CriticalRegionExample {
+public class CriticalRegion {
     
     // Declare a static Lock object using ReentrantLock for thread synchronization
     private static final Lock lock = new ReentrantLock();
