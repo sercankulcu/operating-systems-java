@@ -18,7 +18,7 @@ public class CriticalRegion {
     public static void main(String[] args) {
         // Create first thread that will increment the counter 100,000 times
         Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 1000000; i++) {
                 // Call the synchronized increment method
                 incrementCounter();
             }
@@ -26,7 +26,7 @@ public class CriticalRegion {
         
         // Create second thread that will also increment the counter 100,000 times
         Thread t2 = new Thread(() -> {
-            for (int i = 0; i < 100000; i++) {
+            for (int i = 0; i < 1000000; i++) {
                 // Call the synchronized increment method
                 incrementCounter();
             }
