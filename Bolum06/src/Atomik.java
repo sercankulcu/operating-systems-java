@@ -37,10 +37,9 @@ public class Atomik {
 	}
 }
 
-/*
- * Beklenen cikti (her calistirmada ayni):
- * AtomicInteger = 200000
- * synchronized  = 200000
- * true 6
- * false 6
- */
+/* Beklenen cikti:
+AtomicInteger = 200000
+synchronized  = 200000
+true 6
+false 6
+*/

@@ -29,6 +29,15 @@ Each folder is also an Eclipse project (`File > Import > Existing Projects into 
 
 Comments and identifiers are in Turkish, written without Turkish characters so the files compile with any platform encoding.
 
+## Automatic check
+
+`ci/run_examples.py` compiles every `BolumNN` folder with JDK 21, runs every program and compares its output with the expected output at the end of the file. GitHub Actions runs it on every push. A program whose output changes from run to run (timings, random numbers, thread order, the network) says so above its expected output and only has to run; the window programs of a Swing chapter are skipped, since the check runs without a screen. To run the check locally:
+
+```bash
+python ci/run_examples.py            # every chapter
+python ci/run_examples.py Bolum03    # one chapter
+```
+
 ## Contact
 
 For questions or suggestions, contact [Sercan Külcü](https://github.com/sercankulcu) or open an issue on GitHub.

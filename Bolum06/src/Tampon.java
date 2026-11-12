@@ -55,7 +55,6 @@ class Tampon {
 	}
 }
 
-/*
- * Beklenen cikti (her calistirmada ayni):
- * 1 2 3 4 5 | toplam = 15
- */
+/* Beklenen cikti:
+1 2 3 4 5 | toplam = 15
+*/

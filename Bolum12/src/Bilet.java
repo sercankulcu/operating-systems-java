@@ -1,6 +1,5 @@
 // Bilet kilidi (ticket lock): next bilet dagitir, serving sirasi geleni
 // gosterir. Kilit adildir: is parcaciklari bilet sirasiyla girer.
-// Beklenen cikti: sayac = 200000
 import java.util.concurrent.atomic.*;
 
 public class Bilet {
@@ -26,3 +25,7 @@ public class Bilet {
 		System.out.println("sayac = " + sayac);
 	}
 }
+
+/* Beklenen cikti:
+sayac = 200000
+*/

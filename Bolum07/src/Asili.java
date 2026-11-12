@@ -75,10 +75,9 @@ public class Asili {
 	}
 }
 
-/*
- * Beklenen cikti:
- * T1 bekliyor, kilit sahibi T2
- * T2 bekliyor, kilit sahibi T1
- * T1: BLOCKED, T2: BLOCKED
- * Tespit eder ama kurtarmaz; daemon is parcaciklari JVM ile biter.
- */
+/* Beklenen cikti:
+T1 bekliyor, kilit sahibi T2
+T2 bekliyor, kilit sahibi T1
+T1: BLOCKED, T2: BLOCKED
+Tespit eder ama kurtarmaz; daemon is parcaciklari JVM ile biter.
+*/

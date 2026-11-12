@@ -68,8 +68,9 @@ public class TryLockGeriAlma {
 	}
 }
 
-/*
- * Beklenen cikti (ikinci satirdaki sayilar calistirmaya gore degisir):
- * x=1000 y=1000 toplam=2000
- * kilitlenme yok; geri alinan deneme: 2, sure: 120 ms
- */
+/* Not: bu programin ciktisi her calistirmada degisir (geri alinan deneme sayisi ve sure);
+   asagidaki bir ornek calistirmadir. */
+/* Beklenen cikti:
+x=1000 y=1000 toplam=2000
+kilitlenme yok; geri alinan deneme: 4, sure: 117 ms
+*/

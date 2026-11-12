@@ -14,7 +14,8 @@ public class Yaris {
 	}
 }
 
-/* Beklenen cikti: 2 000 000'dan kucuk ve her calistirmada farkli, ornegin
-sayac = 1456465
-(JIT dongu govdesini tek toplamaya cevirirse bazen 2000000 de cikabilir.)
+/* Not: bu programin ciktisi her calistirmada degisir (sayac 2.000.000'dan kucuk ve her seferinde farkli (yaris durumu; JIT dongu govdesini tek toplamaya cevirirse bazen 2000000 de cikabilir));
+   asagidaki bir ornek calistirmadir. */
+/* Beklenen cikti:
+sayac = 1431210
 */

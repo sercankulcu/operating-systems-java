@@ -37,10 +37,9 @@ public class TekYuva {
 	}
 }
 
-/*
- * Beklenen cikti (her calistirmada ayni; slayttaki "alindi" Turkce karakterlidir):
- * alindi 10
- * alindi 20
- * alindi 30
- * alindi 40
- */
+/* Beklenen cikti:
+alindi 10
+alindi 20
+alindi 30
+alindi 40
+*/

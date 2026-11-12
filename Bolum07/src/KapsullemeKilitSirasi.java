@@ -79,9 +79,7 @@ public class KapsullemeKilitSirasi {
 	}
 }
 
-/*
- * Beklenen cikti (ilk satir calistirmaya gore degisebilir; JDK 21'de neredeyse
- * her zaman kilitlenir):
- * Capraz addAll: KILITLENDI: T1 -> T2; T2 -> T1;
- * Duzeltilmis surum: kilitlenme yok, iki is parcacigi da bitti
- */
+/* Beklenen cikti:
+Capraz addAll: KILITLENDI: T1 -> T2; T2 -> T1;
+Duzeltilmis surum: kilitlenme yok, iki is parcacigi da bitti
+*/

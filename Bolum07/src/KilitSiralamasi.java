@@ -43,7 +43,6 @@ public class KilitSiralamasi {
 	}
 }
 
-/*
- * Beklenen cikti:
- * x=1000 y=1000, kilitlenme yok
- */
+/* Beklenen cikti:
+x=1000 y=1000, kilitlenme yok
+*/

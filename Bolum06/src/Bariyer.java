@@ -37,8 +37,7 @@ public class Bariyer {
 	}
 }
 
-/*
- * Beklenen cikti (her calistirmada ayni):
- * faz 0 tamam
- * faz 1 tamam
- */
+/* Beklenen cikti:
+faz 0 tamam
+faz 1 tamam
+*/

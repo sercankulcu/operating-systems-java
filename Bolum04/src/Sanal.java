@@ -20,7 +20,9 @@ public class Sanal {
 	}
 }
 
-/* Beklenen cikti (sure makineye gore degisir):
+/* Not: bu programin ciktisi her calistirmada degisir (sure makineye ve calistirmaya gore);
+   asagidaki bir ornek calistirmadir. */
+/* Beklenen cikti:
 bitti
-sure: 2197 ms
+sure: 2083 ms
 */

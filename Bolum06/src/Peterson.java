@@ -38,7 +38,6 @@ public class Peterson {
 	}
 }
 
-/*
- * Beklenen cikti (her calistirmada ayni):
- * sayac = 200000
- */
+/* Beklenen cikti:
+sayac = 200000
+*/

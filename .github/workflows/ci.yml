@@ -1,0 +1,19 @@
+name: build
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  examples:
+    name: Compile, run and check the expected output
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run every example program
+        run: python ci/run_examples.py
