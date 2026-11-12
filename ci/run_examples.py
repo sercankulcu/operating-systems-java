@@ -14,8 +14,10 @@ without leaving files behind.
 The expected output is the block at the end of a file:
     Java:   /* Beklenen cikti:  ...  */
     Python: # Beklenen çıktı:  followed by '# ' lines
-A file whose output changes on every run says so in a note above the block
-("her calistirmada degisir"); it only has to run. Swing programs that need a
+A file whose output changes on every run or with the operating system says so in a
+note above the block ("her calistirmada degisir", "isletim sistemine gore degisir");
+it only has to run. Identity hash codes in Object.toString output (Kopek@1b6d3586)
+and OS-specific error texts are treated as equal. Swing programs that need a
 screen are reported as skipped. Output is produced with the Turkish locale
 (decimal comma), as in the course.
 """
@@ -26,7 +28,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMEOUT = 30
 JAVA_FLAGS = ['-Djava.awt.headless=true', '-Dfile.encoding=UTF-8', '-Dstdout.encoding=UTF-8',
               '-Dstderr.encoding=UTF-8', '-Duser.language=tr', '-Duser.country=TR']
-VARIES = re.compile(r'her [cç]al[ıi][sş]t[ıi]rmada de[gğ]i[sş]ir', re.I)
+VARIES = re.compile(r'(her [cç]al[ıi][sş]t[ıi]rmada|i[sş]letim sistemine g[oö]re) de[gğ]i[sş]ir', re.I)
 
 
 def tool(name):
@@ -70,6 +72,7 @@ def neutral(ls):
     for l in ls:
         for a, b in OS_TEXT:
             l = l.replace(a, b)
+        l = re.sub(r'@[0-9a-f]{5,8}\b', '@<hash>', l)   # Object.toString: identity hash differs per JVM
         out.append(l.replace('*/', '* /'))   # the block cannot contain the comment end
     return out
 
@@ -98,9 +101,9 @@ def judge(rel, src, exp, cmd):
         shutil.rmtree(work, ignore_errors=True)
     if rc is None:
         return rel, 'TIMEOUT', ['did not finish in %d s' % TIMEOUT]
+    if 'HeadlessException' in out:          # needs a screen; may still exit with 0 (event thread)
+        return rel, 'skipped (window)', []
     if rc != 0:
-        if 'HeadlessException' in out:
-            return rel, 'skipped (window)', []
         return rel, 'FAILED', ['exit code %d' % rc] + lines(out)[-4:]
     if left:
         return rel, 'LEFT FILES', left[:5]
